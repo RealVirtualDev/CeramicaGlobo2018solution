@@ -1,0 +1,27 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+
+@{
+    ViewBag.Title = "Lista Utenti Newsletter";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="contenteditor">
+    <div class="roundbox" style="">
+
+        <div class="pageeditor"></div>
+
+    </div>
+</div>
+<div class="info">
+    <a class="btn btn-primary" href="/admin/utentinewsletter/getcsv">SCARICA CSV</a>
+</div>
+@*GRIGLIA*@
+<div id="grid"></div>
+
+@section footerScript
+{
+
+    <script src="/Content/Scripts/Admin/utentinewsletter.js"></script>
+
+}

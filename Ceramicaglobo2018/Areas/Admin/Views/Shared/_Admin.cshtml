@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*<script src="/Content/css/CustomComponents.css"></script>*@
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row header">
+           
+
+                <div class="headerbar">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6"><img class="img-fluid" src="~/images/admin/common/savonestore.png" /></div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 text-right"><img class="pull-right img-fluid" src="~/images/admin/common/realvirtual.png" /></div>
+                    </div>
+                </div>
+                <div class="menubar">
+                    @{Html.RenderAction("MenuAdmin", "Menu");}
+                </div>
+                <div class="titlelabelWrapper"><div class="titleLabel">@ViewBag.Title</div></div>
+
+        </div>
+
+        <div class="row adminbody">
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="row footerbar">
+                Per info e assistenza scrivere a <a href="mailto:assistenza@realvirtual.it">assistenza@realvirtual.it</a>
+            </div>
+        </footer>
+        <div id="fileselectorPlaceHolder"></div>
+
+        @*@if (HttpContext.Current.IsDebuggingEnabled)
+        {
+
+        }
+        else
+        {
+           
+        }*@
+
+        <link href="~/bundles/css/admin/all.css" rel="stylesheet" />
+
+        <script src="~/Content/Scripts/jquery.js"></script>
+        <script src="~/Content/Scripts/Admin/bootstrapmin.js"></script>
+        <script src="~/Content/Scripts/jsvalidator.js"></script>
+        <script src="~/Content/Scripts/Admin/jlslidemenu.js"></script>
+        <script src="~/Content/Scripts/Admin/AdminCommon.js"></script>
+        <script src="~/Content/Scripts/jquery.jltable.v3.js"></script>
+        <script src="~/Content/Scripts/jquery.jlupload.js"></script>
+        <script src="/Content/Scripts/Admin/CustomComponents.js"></script>
+
+        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="/ckfinder/ckfinder.js"></script>
+        <script src="/ckeditor/lang/it.js"></script>
+
+        @RenderSection("footerScript", false)
+        @{Html.RenderPartial("_MessageBox");}
+    </div>
+</body>
+</html>

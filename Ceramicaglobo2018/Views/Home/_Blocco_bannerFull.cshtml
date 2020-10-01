@@ -1,0 +1,30 @@
+﻿@using WebSite.Models
+@model  BlocchiHome
+@*BLOCCO IMMAGINE LARGHEZZA INTERA *@
+
+<div class="col-12 blocco_bannerfull">
+    <article>
+       
+        <h1>@Model.titolo</h1>
+        <div class="textblock margin-bottom-20">@Html.Raw(Model.descrizione)</div>
+        <img class="img-fluid" src="@Model.img" />
+        @if (Model.showcontent || !string.IsNullOrEmpty(Model.link))
+            {
+                string link = "/home/" + Model.urlname;
+                string target = "_self";
+
+                if (!string.IsNullOrEmpty(Model.link))
+                {
+                    link = Model.link;
+                    target = "_blank";
+                }
+
+                <div class="text-right">
+                    <a target="@target" href="@link" class="btn btn-more">@Model.buttonlabel</a>
+                </div>
+        }
+
+    </article>
+</div>
+
+

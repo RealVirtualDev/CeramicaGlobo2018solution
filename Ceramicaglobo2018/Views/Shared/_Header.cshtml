@@ -1,0 +1,182 @@
+﻿@using WebSite.Models
+@using WebSite.Infrastructure
+@using WebSite.Helpers
+@model List<MenuTop>
+
+
+
+<header>
+    <div class="header" style="height:131px;" >
+        <div class="headertop">
+
+            <div class="sitecontent">
+                <div class="row no-gutters">
+                    <div class="col-md-6 col-sm-12 col-12"><a href="@(WebSite.Helpers.LanguageSetting.GetLangNavigation())/"><img class="img-fluid" alt="Ceramica Globo" src="~/images/common/ceramicaglobo.jpg" /></a></div>
+                    <div class="col-md-6 col-sm-12 col-12">
+
+                        <div class="input-group margin-top-10">
+                            <input data-lang="@LanguageSetting.Lang" id="tbsearchheader" type="text" class="form-control" placeholder="@("bt_cerca".Translate())" aria-label="@("bt_cerca".Translate())">
+                            <div class="input-group-append">
+                                <button onclick="searchproduct('@LanguageSetting.Lang')" class="btn btn-light text-hide btn-cerca" type="button">Cerca</button>
+                                <button onclick="searchproductadv('@LanguageSetting.Lang')" class="btn btn-light d-none d-sm-block btn-radius-right" type="button" style="border-left-color:white;">@("lbl_ricercaavanzata".Translate())</button>
+                                <button onclick="searchproductadv('@LanguageSetting.Lang')" class="btn btn-light d-block d-sm-none btn-radius-right" type="button" style="border-left-color:white;">Adv</button>
+                                <button class="btn btn-menumobile text-hide d-block d-md-none" type="button" style="border-left-color:white;">MENU</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+      
+        <div class="headermenuwrapper d-none d-md-block">
+            <div class="sitecontent">
+                <div class="row no-gutters">
+                    <div class="col-md-12">
+                        <ul class="nav nav-pills nav-fill topmenu">
+                            <li class="nav-item">
+                                <a class="text-uppercase" href="#">@Model.Where(x => x.areakey == "azienda").Select(x=>x.area).First()</a>
+                                <div class="nav-submenu">
+                                    @foreach (MenuTop m in Model.Where(x => x.areakey == "azienda").OrderBy(x => x.ordinamento))
+                                    {
+                                        <a class="" href="@m.url">@m.voce</a>
+                                    }
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-uppercase" href="#">@Model.Where(x => x.areakey == "mondo globo").Select(x => x.area).First()</a>
+                                <div class="nav-submenu">
+                                    @foreach (MenuTop m in Model.Where(x => x.areakey == "mondo globo").OrderBy(x => x.ordinamento))
+                                    {
+                                        <a class="" href="@m.url">@m.voce</a>
+                                    }
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@(LanguageSetting.GetLangNavigation() + (LanguageSetting.Lang=="it" ? "/collezioni" : "/collections"))">@("menu_collezioni".Translate().ToUpper())</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@(LanguageSetting.GetLangNavigation() + (LanguageSetting.Lang=="it" ? "/tipologie" : "/typologies"))">@("menu_tipologieprodotti".Translate().ToUpper())</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-uppercase" href="#">@Model.Where(x => x.areakey == "download").Select(x => x.area).First()</a>
+                                <div class="nav-submenu">
+                                    @foreach (MenuTop m in Model.Where(x => x.areakey == "download").OrderBy(x => x.ordinamento))
+                                    {
+                                        <a class="" href="@m.url">@m.voce</a>
+                                    }
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-uppercase" href="#">@Model.Where(x => x.areakey == "rete di vendita").Select(x => x.area).First()</a>
+                                <div class="nav-submenu">
+                                   @foreach (MenuTop m in Model.Where(x => x.areakey == "rete di vendita").OrderBy(x => x.ordinamento))
+                                   {
+                                    <a class="" href="@m.url">@m.voce</a>
+                                   }
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-uppercase" href="#">@Model.Where(x => x.areakey == "news").Select(x => x.area).First()</a>
+                                <div class="nav-submenu">
+                                    @foreach (MenuTop m in Model.Where(x => x.areakey == "news").OrderBy(x => x.ordinamento))
+                                    {
+                                        <a class="" href="@m.url">@m.voce</a>
+                                    }
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-uppercase" href="#">@Model.Where(x => x.areakey == "contatti").Select(x => x.area).First()</a>
+                                <div class="nav-submenu">
+                                    @foreach (MenuTop m in Model.Where(x => x.areakey == "contatti").OrderBy(x => x.ordinamento))
+                                    {
+                                        <a class="" href="@m.url">@m.voce</a>
+                                    }
+                                </div>
+                            </li>
+                            @*<li class="nav-item">
+                                <a class="" target="_blank" href="http://blog.ceramicaglobo.com@(LanguageSetting.Lang!="it" ? "/en" : "")">BLOG</a>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+<div class="tendinamenu" data-status="closed">
+    <div class="menumobileframe">
+        <ul class="list-unstyled">
+            <li><a href="/">HOME</a></li>
+            <li><a data-frame="mmf1">@Model.Where(x => x.areakey == "azienda").Select(x => x.area).First()</a></li>
+            <li><a data-frame="mmf2">@Model.Where(x => x.areakey == "mondo globo").Select(x => x.area).First()</a></li>
+            <li><a href="@(LanguageSetting.GetLangNavigation() + (LanguageSetting.Lang=="it" ? "/collezioni" : "/collections"))">@("menu_collezioni".Translate().ToUpper())</a></li>
+            <li><a href="@(LanguageSetting.GetLangNavigation() + (LanguageSetting.Lang=="it" ? "/tipologie" : "/typologies"))">@("menu_tipologieprodotti".Translate().ToUpper())</a></li>
+            <li><a data-frame="mmf3">@Model.Where(x => x.areakey == "download").Select(x => x.area).First()</a></li>
+            <li><a data-frame="mmf4">@Model.Where(x => x.areakey == "rete di vendita").Select(x => x.area).First()</a></li>
+            <li><a data-frame="mmf5">@Model.Where(x => x.areakey == "news").Select(x => x.area).First()</a></li>
+            <li><a data-frame="mmf6">@Model.Where(x => x.areakey == "contatti").Select(x => x.area).First()</a></li>
+        </ul>
+    </div>
+    @*AZIENDA*@
+    <div class="menumobileframe menumobilesubframe" id="mmf1">
+        <div class="menumobileframeback">@Model.Where(x => x.areakey == "azienda").Select(x => x.area).First()</div>
+        <ul class="list-unstyled">
+            @foreach (MenuTop m in Model.Where(x => x.areakey == "azienda").OrderBy(x => x.ordinamento))
+            {
+                <li><a class="" href="@m.url">@m.voce</a></li>
+            }
+        </ul>
+    </div>
+    @*MONDO GLOBO*@
+    <div class="menumobileframe menumobilesubframe" id="mmf2">
+        <div class="menumobileframeback">@Model.Where(x => x.areakey == "mondo globo").Select(x => x.area).First()</div>
+        <ul class="list-unstyled">
+            @foreach (MenuTop m in Model.Where(x => x.areakey == "mondo globo").OrderBy(x => x.ordinamento))
+            {
+                <li><a class="" href="@m.url">@m.voce</a></li>
+            }
+        </ul>
+    </div>
+    @*DOWNLOAD*@
+    <div class="menumobileframe menumobilesubframe" id="mmf3">
+        <div class="menumobileframeback">@Model.Where(x => x.areakey == "download").Select(x => x.area).First()</div>
+        <ul class="list-unstyled">
+            @foreach (MenuTop m in Model.Where(x => x.areakey == "download").OrderBy(x => x.ordinamento))
+            {
+                <li><a class="" href="@m.url">@m.voce</a></li>
+            }
+        </ul>
+    </div>
+    @*RETE DI VENDITA*@
+    <div class="menumobileframe menumobilesubframe" id="mmf4">
+        <div class="menumobileframeback">@Model.Where(x => x.areakey == "rete di vendita").Select(x => x.area).First()</div>
+        <ul class="list-unstyled">
+            @foreach (MenuTop m in Model.Where(x => x.areakey == "rete di vendita").OrderBy(x => x.ordinamento))
+            {
+                <li><a class="" href="@m.url">@m.voce</a></li>
+            }
+        </ul>
+    </div>
+    @*NEWS*@
+    <div class="menumobileframe menumobilesubframe" id="mmf5">
+        <div class="menumobileframeback">@Model.Where(x => x.areakey == "news").Select(x => x.area).First()</div>
+        <ul class="list-unstyled">
+            @foreach (MenuTop m in Model.Where(x => x.areakey == "news").OrderBy(x => x.ordinamento))
+            {
+                <li><a class="" href="@m.url">@m.voce</a></li>
+            }
+        </ul>
+    </div>
+    @*CONTATTI*@
+    <div class="menumobileframe menumobilesubframe" id="mmf6">
+        <div class="menumobileframeback">@Model.Where(x => x.areakey == "contatti").Select(x => x.area).First()</div>
+        <ul class="list-unstyled">
+            @foreach (MenuTop m in Model.Where(x => x.areakey == "contatti").OrderBy(x => x.ordinamento))
+            {
+                <li><a class="" href="@m.url">@m.voce</a></li>
+            }
+        </ul>
+    </div>
+</div>

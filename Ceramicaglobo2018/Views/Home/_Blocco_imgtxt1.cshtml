@@ -1,0 +1,30 @@
+﻿@using WebSite.Models
+@model  BlocchiHome
+@*BLOCCO CON COLONNE 1/3*@
+
+    <div class="col-md-4 col-sm-6 col-12 blocco_imgtxt1">
+        <article>
+            <img class="img-fluid" src="@Model.ico" />
+            <h1>@Model.titolo</h1>
+            <div class="textblock">@Html.Raw(Model.descrizione)</div>
+            @if (Model.showcontent || !string.IsNullOrEmpty(Model.link))
+            {
+                string link = "/home/" + Model.urlname;
+                string target = "_self";
+
+                if (!string.IsNullOrEmpty(Model.link))
+                {
+                    link = Model.link;
+                    target = "_blank";
+                }
+
+                <div class="text-right">
+                    <a target="@target" href="@link" class="btn btn-more">@Model.buttonlabel</a>
+                </div>
+            }
+
+
+        </article>
+    </div>
+
+

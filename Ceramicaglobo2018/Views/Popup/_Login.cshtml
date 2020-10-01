@@ -1,0 +1,41 @@
+﻿@using WebSite.Models
+@using WebSite.Infrastructure
+@using WebSite.Helpers
+
+<div class="loginPopup" data-returl="@Request.RawUrl">
+    <div class="">
+        <div class="row loginform">
+            <div class="col-md-12 text-right margin-bottom-20">
+                <a onclick="loginPopup.close()" class="btn-close"></a>
+            </div>
+            <div class="col-md-12 text-center margin-bottom-20">
+                <a class="text-danger" href="@(LanguageSetting.GetLangNavigation() + "/" + (LanguageSetting.Lang=="it" ? "registrazione" : "register") + "?r=" + ViewBag.returl)">@("lbl_nonregistrato".Translate())</a>
+            </div>
+            <div class="col-12 form-group">
+                <label>Email</label>
+                <input id="tbemaillogin" type="text" class="form-control" />
+            </div>
+            <div class="col-12 form-group passwordrow">
+                <label>Password</label>
+                <input id="tbpasswordlogin" type="password" class="form-control" />
+            </div>
+            <div class="col-12">
+                <a id="bttoggle" onclick="loginPopup.togglemode()" data-type="recuperapassword" data-logintext="@("bt_login".Translate())" data-recuperapasswordtext="@("lbl_recuperapassword".Translate())" class="text-secondary pointer" >@("lbl_recuperapassword".Translate())</a>
+            </div>
+        </div>
+       <div class="row">
+           <div class="messagelogin"></div>
+           <div class="col-12 text-right margin-top-30 btlogin">
+               <a id="btlogin" onclick="loginPopup.login()" class="btn btn-secondary btn-sm pointer" style="margin-right:0;">LOGIN</a>
+           </div>
+           <div class="col-12 text-center margin-top-30 btchiudi">
+               <a id="btchiudi" onclick="loginPopup.reloadpage()" class="btn btn-secondary btn-sm pointer">@("bt_chiudi".Translate().ToUpper())</a>
+           </div>
+           <div class="col-12 text-right margin-top-30 btrecuperapassword">
+               <a id="btrecupera" onclick="loginPopup.recuperapassword()" class="btn btn-secondary btn-sm pointer" style="margin-right:0;">@("bt_invia".Translate().ToUpper())</a>
+           </div>
+       </div>
+       
+    </div>
+</div>
+<div class="oscuragallery"></div>

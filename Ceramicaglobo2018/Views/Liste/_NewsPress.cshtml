@@ -1,0 +1,13 @@
+﻿@using WebSite.Models
+@model List<NewsPress>
+
+<div class="row margin-top-80">
+    @foreach (NewsPress r in Model)
+    {
+        <div class="col-md-2 col-6 item-column">
+           <img src="@r.img" alt="" class="img-fluid" />
+            <h2 class="item-titolo">@r.titolo</h2>
+            
+        </div>
+    }
+</div>

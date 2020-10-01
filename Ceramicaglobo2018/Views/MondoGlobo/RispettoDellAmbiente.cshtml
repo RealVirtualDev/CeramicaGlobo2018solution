@@ -1,0 +1,56 @@
+﻿@using WebSite.Models
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@model PageInfo
+
+
+@section headerMeta{
+    <title>@(Model.metatitle)</title>
+    <meta name="description" content="@(Model.metadescription)" />
+}
+
+@section BreadcrumbSection{
+    @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <span>@("menu_mondoglobo".Translate())</span> | <span>@("menu_rispettoambiente".Translate())</span>
+}
+@section sopraTesto{
+    @{ Html.RenderAction("getSliderAmbiente");}
+    }
+
+@{ Html.RenderAction("ParagrafiRispettoAmbiente","Liste");}
+
+@section footerScript{
+    <script>
+
+            // SLIDER INTERNO
+
+
+            let numItems = $(".sectionslideritem").length;
+            let currentFrame = 1;
+
+           // console.info(numItems);
+            setInterval(function () {
+                moveNextSlide()
+
+            }, 8000);
+
+            var moveNextSlide = function () {
+                let nextFrame = (currentFrame+1)>=numItems ? 1 : (currentFrame+1);
+                let prevFrame = currentFrame;
+
+               // console.info(nextFrame,prevFrame,currentFrame);
+                currentFrame = nextFrame;
+
+                $("#sectionslideritem" + prevFrame).stop(true, true).fadeOut("slow");
+                $("#sectionslideritem" + nextFrame).stop(true, true).fadeIn("slow");
+
+            }
+
+            $(".sectionslider").height($(".imgslider").height());
+
+            $(window).on("resize", function () {
+                $(".sectionslider").height($(".imgslider").height());
+            })
+
+
+    </script>
+}

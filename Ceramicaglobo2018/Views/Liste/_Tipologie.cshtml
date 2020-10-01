@@ -1,0 +1,12 @@
+﻿@using WebSite.Models
+@model List<TipologieMenu>
+
+<div class="row margin-top-80">
+    @foreach (TipologieMenu r in Model)
+    {
+        <div class="col-md-3 col-sm-4 col-12 item-column text-center">
+            <a class="d-block" href="@(ViewBag.sectionurl + r.urlname)"><img src="@r.img" alt="" class="img-fluid" /></a>
+            <h2 class="item-titolo text-center">@(r.titolo)</h2>
+        </div>
+    }
+</div>

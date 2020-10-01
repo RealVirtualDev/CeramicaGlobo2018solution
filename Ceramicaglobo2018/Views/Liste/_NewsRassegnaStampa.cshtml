@@ -1,0 +1,12 @@
+﻿@using WebSite.Models
+@model List<NewsRassegnaStampa>
+
+<div class="row margin-top-80">
+    @foreach (NewsRassegnaStampa r in Model)
+    {
+        <div class="col-md-3 col-6 item-column">
+            <a class="d-block"  href="@r.pdf" target="_blank"><img src="@r.img" alt="" class="img-fluid" /></a>
+            <h2 class="item-titolo">@r.titolo</h2>
+        </div>
+    }
+</div>

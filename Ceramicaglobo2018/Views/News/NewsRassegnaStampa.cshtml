@@ -1,0 +1,15 @@
+﻿@using WebSite.Models
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@model PageInfo
+
+
+@section headerMeta{
+    <title>@(Model.metatitle)</title>
+    <meta name="description" content="@(Model.metadescription)" />
+}
+
+@section BreadcrumbSection{
+    @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <span>@("menu_news".Translate())</span> | <span>@("menu_rassegnastampa".Translate())</span>
+}
+@{ Html.RenderAction("RassegnaStampa", "Liste");}

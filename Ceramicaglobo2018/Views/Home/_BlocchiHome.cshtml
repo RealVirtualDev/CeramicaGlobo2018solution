@@ -1,0 +1,10 @@
+﻿@using WebSite.Models
+@model List<BlocchiHome>
+
+<div class="row margin-top-60">
+@foreach (BlocchiHome b in Model)
+{
+    Html.RenderPartial("_Blocco_" + b.template, b);
+}
+</div>
+

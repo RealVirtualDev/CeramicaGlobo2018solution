@@ -1,0 +1,50 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@using HtmlHelpers
+@model  CollezioneCategorie
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title>@(Model.Collezione.metatitle)</title>
+    <meta name="description" content="@(Model.Collezione.metadescription)" />
+}
+
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    <nav>
+        <div class="pagebreadcrumb">
+            @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <a href="@(Model.Collezione.lang=="it" ? "/collezioni" : ("/" + Model.Collezione.lang + "/collections"))">@("menu_collezioni".Translate())</a> | <span>@Model.Collezione.titolo</span>
+        </div>
+    </nav>
+    <article>
+        <div class="margin-top-40">
+            <a href="@(Model.Collezione.lang=="it" ? "/collezioni" : ("/" + Model.Collezione.lang + "/collections"))" class="text-hide btback">COLLECTIONS</a>
+            <h1 class="sectionproducttitle">@Model.Collezione.titolo</h1>
+        </div>
+        
+        <div class="sectiontext text-justify  margin-top-40">
+            @Html.FormatContent(Model.Collezione.content)
+        </div>
+    </article>
+    <nav>
+        <div class="row margin-top-60">
+            @foreach(CategoriaLink c in Model.Categorie)
+            {
+                @*<div class="col-md-3">
+                    <a href="@c.link"><img class="img-fluid" src="@c.img" /></a>
+                </div>*@
+
+                <div class="col-md-3 col-sm-4 col-12 item-column text-center">
+                    <a class="d-block" href="@(Model.Collezione.urlname + "/" + c.link)"><img src="@c.img" alt="" class="img-fluid" /></a>
+                    <h2 class="item-titolo text-center">@c.Categoria.ToUpper()</h2>
+
+                </div>
+            }
+        </div>
+    </nav>
+</div>
+ 

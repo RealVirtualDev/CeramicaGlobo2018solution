@@ -1,0 +1,169 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Infrastructure
+
+
+@model AdvancedSearch
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title>@(Model.PageInfo.metatitle)</title>
+    <meta name="description" content="@(Model.PageInfo.metadescription)" />
+}
+
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    <nav>
+        <div class="pagebreadcrumb">
+            @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <span>@("txt_ricercaavanzata".Translate())</span>
+        </div>
+    </nav>
+  <div class="row ">
+      <div class="col-md-12 margin-bottom-60">
+          <h1 class="sectiontitle">@(Model.PageInfo.titolo)</h1>
+      </div>
+      <div class="col-md-4">
+          @Model.PageInfo.content
+      </div>
+      <div class="col-md-8">
+          <div class="row">
+              <div class="col-md-12 form-group">
+                  <label>@("txt_searchadvanced".Translate())</label>
+                  <input id="tbsearchtext" type="text" class="form-control" value="@(Request.QueryString["q"])" />
+              </div>
+              <div class="col-md-6 form-group">
+                  <label>@("lbl_collezioni".Translate())</label>
+                  <select class="form-control" id="ddlcollezione">
+                      <option value="0">@("lbl_tuttelecollezioni".Translate())</option>
+                      @foreach (KeyValuePair<string, string> kv in Model.Collezioni)
+                      {
+                          <option value="@kv.Key">@kv.Value</option>
+                      }
+                  </select>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label>@("lbl_categoria".Translate())</label>
+                  <select data-nulltext="@("lbl_tuttelecategorie".Translate())" class="form-control" id="ddlcategoria">
+                      <option value="0">@("lbl_tuttelecategorie".Translate())</option>
+                      @foreach (KeyValuePair<string, string> kv in Model.Categorie)
+                      {
+                          <option value="@kv.Key">@kv.Value</option>
+                      }
+                  </select>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label>@("lbl_tipodimensione".Translate())</label>
+                  <select class="form-control" id="ddltipodimensione">
+                      <option value="0">@("lbl_larghezza".Translate())</option>
+                      <option value="1">@("lbl_profondita".Translate())</option>
+
+                  </select>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label>@("lbl_dimensione".Translate())</label>
+                  <select data-nulltext="@("lbl_tutteledimensioni".Translate())" class="form-control" id="ddldimensione">
+                      <option value="0">@("lbl_tutteledimensioni".Translate())</option>
+                      @foreach (decimal v in Model.Larghezze)
+                      {
+                          <option value="@v">@(v + " Cm")</option>
+                      }
+                  </select>
+              </div>
+              
+            @*FINITURA*@
+              <div class="col-md-6 form-group">
+                  <label>@("lbl_finitura".Translate())</label>
+                  <select data-nulltext="@("lbl_tuttelefiniture".Translate())" class="form-control" id="ddlfinitura">
+                      <option value="0">@("lbl_tuttelefiniture".Translate())</option>
+                      @foreach (int igfinitura in Model.Finiture.Keys)
+                      {
+                          <option value="@igfinitura">@(Model.Finiture[igfinitura])</option>
+                      }
+                  </select>
+              </div>
+              <div class="col-md-12 margin-top-20 text-right">
+                  <a id="btgosearch" data-lang="@Model.PageInfo.lang" onclick="gosearch()" class="btn btn-light btn-invia" data-loading-text="Loading...">@("invia".Translate())</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+@section footerScript{
+    
+    <script>
+        $("#ddlcollezione").on("change", function () {
+            var nulltext = $("#ddlcategoria").attr("data-nulltext");
+            var igcollezione = $("#ddlcollezione").val();
+
+            $("#ddlcategoria option").remove();
+            $("#ddlcategoria").append('<option value="0">' + nulltext + '</option>');
+
+            $.post("/prodotti/getCollezioneCategorie?igcollezione=" + igcollezione, function (d) {
+               // console.info(d);
+                $.each(d.categorie, function (i, v) {
+                    //console.info(v, v[0], v[1],i);
+                    $("#ddlcategoria").append('<option value="' + i + '">' + v + '</option>');
+                });
+                compilafiniture(d.finiture);
+                compiladimensioni();
+            })
+        })
+
+        $("#ddlcategoria,#ddltipodimensione").on("change", function () {
+            compiladimensioni();
+        })
+
+        var compiladimensioni=function(){
+            var igcollezione = $("#ddlcollezione").val();
+            var igcategoria = $("#ddlcategoria").val();
+            var tipodimensione = $("#ddltipodimensione").val();
+            var nulltext = $("#ddldimensione").attr("data-nulltext");
+            $("#ddldimensione option").remove();
+            $("#ddldimensione").append('<option value="0">' + nulltext + '</option>');
+
+            $.post("/prodotti/getCollezioneDimensioni?igcollezione=" + igcollezione + "&igcategoria=" + igcategoria + "&tipodimensione=" + tipodimensione, function (d) {
+
+                $.each(d, function (i, v) {
+                    //console.info(v, v[0], v[1],i);
+                    $("#ddldimensione").append('<option value="' + (i + 1 ) + '">' + v + '</option>');
+                })
+
+            })
+        }
+
+
+        var compilafiniture = function (finiture) {
+            //$("#ddlfinitura option").remove();
+            var nulltext = $("#ddlfinitura").attr("data-nulltext");
+            $("#ddlfinitura option").remove();
+            $("#ddlfinitura").append('<option value="0">' + nulltext + '</option>');
+            $.each(finiture, function (i, v) {
+               $("#ddlfinitura").append('<option value="' + i + '">' + v + '</option>');
+            });
+        }
+
+        var gosearch = function () {
+
+            var searchstring = $("#tbsearchtext").val();
+            var igcollezione = $("#ddlcollezione").val();
+            var igcategoria = $("#ddlcategoria").val();
+            var igfinitura = $("#ddlfinitura").val();
+            var tipodimensione = $("#ddltipodimensione").val();
+            var dimensione = 0;
+
+            if ($("#ddldimensione").val() != "0") {
+                dimensione=$("#ddldimensione option:selected").text();
+            }
+          
+            var lang = $("#btgosearch").attr("data-lang");
+
+            //if (searchstring.length >= 3) {
+            window.location.href = (lang == "it" ? "" : "/" + lang) + "/search?q=" + searchstring + "&coll=" + igcollezione + "&cat=" + igcategoria + "&td=" + tipodimensione + "&d=" + dimensione + "&f=" + igfinitura;
+            //}
+
+        }
+
+    </script>
+    }

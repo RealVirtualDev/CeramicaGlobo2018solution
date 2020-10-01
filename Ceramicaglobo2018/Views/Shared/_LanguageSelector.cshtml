@@ -1,0 +1,20 @@
+﻿@using WebSite.Models.ViewModels
+@using WebSite.Models
+@using WebSite.Infrastructure
+@model List<Language>
+
+<div class="LanguageSelectorPopup">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>@("txt_titlanguage".Translate())</h1>
+        </div>
+        @foreach (Language l in Model)
+        {
+            <div class="col-md-6">
+                <a href="/language/ChangeLanguage?lang=@(l.lang)" style="color:black !important;margin:10px;" onclick="changelang('@l.lang')" class="btn-lang btn-lang-@(l.lang)">@l.label</a>
+            </div>
+        }
+     
+    </div>
+</div>
+<div class="oscuragallery"></div>

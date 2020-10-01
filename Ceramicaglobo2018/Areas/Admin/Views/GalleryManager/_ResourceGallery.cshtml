@@ -1,0 +1,53 @@
+﻿@using WebSite.Models
+@model ICollection<ResourceGallery>
+<div class="row componenttitle"><span>GALLERIA IMMAGINI</span></div>
+<div class="row margin-bottom-15 margin-top-15">
+    <input type="file" id="uploadgallery" />
+</div>
+
+<div class="gallerywrapper">
+    @{int idx = 0;}
+    @foreach (ResourceGallery g in Model)
+    {
+        // g.idx = idx;
+        if (g.status != "deleted")
+        {
+
+            <div data-idx="@idx" data-status="@g.status" class="row margin-bottom-15 adminGalleryItem">
+                <div class="col-md-3">
+                    <img src="@(g.imgMin)" class="img-responsive img-thumbnail" />
+                </div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Titolo</label>
+                            <input type="text" class="form-control tbtitolo" value="@g.titolo" />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Descrizione</label>
+                            <textarea class="form-control tbdescrizione" style="height:70px">@g.descrizione</textarea>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>URL Youtube</label>
+                            <input class="form-control tburlvideo" value="@g.urlvideo" />
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-top:100px;" class="col-md-2">
+                    <a data-idx="@idx" class="btn btn-default btn-deleteGalleryItem">ELIMINA</a>
+                </div>
+            </div>
+        }
+        idx++;
+    }
+    <div class="row margin-bottom-15 galleryLoading">
+        <img src="~/images/ajax/loader.gif" />
+    </div>
+    @if (Model.Count == 0)
+    {
+        <div class="emptylist">
+            Non è stata caricata alcuna immagine
+        </div>
+    }
+</div>
+<script src="/Content/Scripts/Admin/resourceGallery.js?v=@(DateTime.Now.Millisecond)"></script>

@@ -1,0 +1,89 @@
+﻿@using WebSite.Models
+@using WebSite.Helpers
+@using HtmlHelpers
+@using WebSite.Infrastructure
+@model PageInfo
+
+@{
+    LanguageSetting.Lang = ViewContext.RouteData.Values["lang"] != null ? ViewContext.RouteData.Values["lang"].ToString() : "it";
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="@LanguageSetting.Lang">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>@(Model.metatitle)</title>
+    <meta name="description" content="@(Model.metadescription)" />
+    @RenderSection("headerMeta", false)
+    <link href="~/bundles/css/all.css" rel="stylesheet" />
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '597184900760665');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+
+</head>
+<body>
+    <div class="container-fluid">
+        @{Html.RenderAction("GetHeader", "Header");}
+        <div class="no-gutters">
+            <div class="sitecontent innercontent" style="margin-top:180px;">
+                <nav>
+                    <div class="pagebreadcrumb">
+                        @RenderSection("BreadCrumbSection", false)
+                    </div>
+                </nav>
+                <article>
+                    <h1 class="sectiontitle">@Model.titolo</h1>
+                    @if (System.IO.File.Exists(Server.MapPath("/public/sectionimage/" + LanguageSetting.Lang + "_" + Model.pname + ".jpg")))
+                    {
+                        <img class="img-fluid margin-top-30" src="~/public/sectionimage/@(LanguageSetting.Lang + "_" + Model.pname + ".jpg")" />
+                    }
+                    @RenderSection("sopraTesto", false)
+                    <div class="sectiontext text-justify  margin-top-40">
+                    @Html.FormatContent(Model.content)
+                    </div>
+                </article>
+            @RenderBody()
+            </div>
+            
+            <a class="btn-goup"></a>
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
+    <script src="~/bundles/scripts/all.js?v=2"></script>
+    @*<script type="text/javascript">
+        load_css_async('/bundles/css/all.css');
+    </script>*@
+
+    @RenderSection("footerScript", false)
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    @*<script async src="https://www.googletagmanager.com/gtag/js?id=UA-294714-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-294714-1');
+        </script>*@
+
+</body>
+</html>

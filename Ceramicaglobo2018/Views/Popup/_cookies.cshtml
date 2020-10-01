@@ -1,0 +1,14 @@
+﻿@using WebSite.Models
+@model PageInfo
+
+<div class="cookiesPopup">
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Raw(Model.content)
+        </div>
+        <div class="col-md-12 text-center margin-top-30">
+            <a href="/popup/acceptcookies?urlback=@Request.RawUrl" class="btn btn-primary btn-sm">ACCETTO</a><a href="https://www.google.com" class="btn btn-secondary btn-sm">NON ACCETTO</a>
+        </div>
+    </div>
+</div>
+<div class="oscuragallery"></div>

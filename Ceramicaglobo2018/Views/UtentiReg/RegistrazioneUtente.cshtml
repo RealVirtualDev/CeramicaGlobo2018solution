@@ -1,0 +1,106 @@
+﻿@using WebSite.Models
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@model PageInfo
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerMeta{
+    <title>@(Model.metatitle)</title>
+    <meta name="description" content="@(Model.metadescription)" />
+}
+
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    <h1 class="sectiontitle">@(Model.titolo)</h1>
+    <div class="row margin-top-80">
+        <div class="col-md-4">
+            @Model.content
+        </div>
+
+        <div class="col-md-8 registerForm" data-lang="@Model.lang">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "registerform" }))
+{
+    @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>@("ragionesociale".Translate())</label>
+                    <input id="tbragionesociale" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>@("nome".Translate())</label>
+                    <input id="tbnome" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("nome".Translate())" type="text" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>@("cognome".Translate())</label>
+                    <input id="tbcognome" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("cognome".Translate())" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>@("professione".Translate())</label>
+                    <input id="tbprofessione" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("professione".Translate())" type="text" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>@("nazione".Translate())</label>
+                    <input id="tbnazione" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("nazione".Translate())" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>@("form_indirizzo".Translate())</label>
+                    <input id="tbindirizzo" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("form_indirizzo".Translate())" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>@("citta".Translate())</label>
+                    <input id="tbcitta" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("citta".Translate())" type="text" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>@("provincia".Translate())</label>
+                    <input id="tbprovincia" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="@("provincia".Translate())" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>@("form_email".Translate())</label>
+                    <input id="tbemail" data-validation="required,email" data-validationlangkey="@("emailnonvalida".Translate())" data-validationfield="@("form_email".Translate())" type="text" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Password</label>
+                    <input id="tbpassword" data-validation="required" data-validationlangkey="@("err_campoobbligatorio".Translate())" data-validationfield="Password" data-validationchars="@("err_passwordcaratterivietati".Translate())" type="password" class="form-control" />
+                </div>
+            </div>
+           <div class="row">
+               <div class="col-md-12">
+                   <label>Privacy Policy</label>
+                   @{Html.RenderAction("getPrivacy");}
+                   <label><input type="checkbox" id="cbaccetta" data-validationerror="@("err_privacy".Translate())" />@("form_cbaccetto".Translate())</label>
+               </div>
+           </div>
+           <div class="row margin-top-30">
+               <div class="col-md-12 text-right ">
+                   <a data-returl="@ViewBag.returl" onclick="ajaxSend()" class="btn btn-light btn-invia" data-loading-text="Loading...">INVIA</a>
+               </div>
+               <div class="bg-forminfo paddingInner error-div col-md-12 margin-top-20 text-center ">
+
+               </div>
+           </div>
+
+        }
+        </div>
+      
+    </div>
+</div>
+
+@{Html.RenderPartial("_MessageBox");}
+@section footerScript{
+    <script src="/Content/Scripts/jsvalidator.js"></script>
+    <script src="/Content/Scripts/messageBox.js"></script>
+    <script src="/Content/Scripts/formRegistrazione.js?v=1"></script>
+}
+

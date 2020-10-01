@@ -1,0 +1,33 @@
+﻿@using WebSite.Models
+@model List<Prodotti>
+    <div  id="modelcontrolaccessori" data-type="customcomponent">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <label>Aggiungi Accessorio</label> ( <a onclick="CustomComponents.AccessoriSelector.resetView()">Ripristina Tutto</a> )
+                <div class="input-group">
+                    <input type="text" class="form-control accessoriosearch" placeholder="Scrivi il codice del prodotto da inserire" />
+                    <span class="input-group-btn">
+                        <a onclick="CustomComponents.AccessoriSelector.search()" class="btn btn-default btn-addaccessorio">CERCA +</a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="accessoriosearchresult margin-top-20 row">
+
+        </div>
+        <div class="divaccessoriselezionati">
+            Nessun Accessorio Selezionato
+        </div>
+        <div class="accessorioselected margin-top-20 row">
+
+        </div>
+
+    </div>
+
+
+<script>
+    // SALVO IL DATASOURCE LATO CLIENT
+    CustomComponents.AccessoriSelector.init('@ViewBag.currentValue');
+</script>

@@ -1,0 +1,15 @@
+﻿@using WebSite.Models
+@model List<Video>
+
+<div class="row margin-top-80">
+    @foreach (Video c in Model)
+    {
+        <div class="col-md-3 item-video">
+            <a class="video-link d-block" data-video-id="@(c.host.ToCharArray()[0] + "-" + c.link)" target="_blank"><img src="@c.img" alt="" class="img-fluid" /></a>
+            
+            <a href="@c.file" class="item-download-button">Download</a>
+            <h2 class="item-titolo-download">@c.titolo</h2>
+        </div>
+    }
+</div>
+

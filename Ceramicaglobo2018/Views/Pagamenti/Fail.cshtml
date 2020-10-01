@@ -1,0 +1,23 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@using HtmlHelpers
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title></title>
+    <meta name="description" content="" />
+}
+<div class="sitecontent innercontent prodottowrapper" style="margin-top:180px;">
+    <h1>Errore Transazione</h1>
+    <p>
+        Si sono verificati dei problemi durante la transazione, non è stato possibile completare il pagamento. / Transation error.
+        <br /><br />
+        <a href="/paynow">Riprova - Try again</a>
+    </p>
+</div>

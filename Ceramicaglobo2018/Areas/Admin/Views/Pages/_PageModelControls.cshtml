@@ -1,0 +1,70 @@
+﻿@using WebSite.Models
+@model PageInfo
+
+@foreach (PageModel pm in Model.Model)
+{
+    if (pm.adminshow)
+    {
+
+        <div class="row form-group">
+            <label class="adminlabel">@(pm.adminlabel)</label>
+            @if (!string.IsNullOrEmpty(pm.admindescription))
+            {
+
+                <div class="adminsublabel">@pm.admindescription</div>
+
+            }
+            @switch (pm.admintype)
+            {
+                case "text":
+                    <input data-validation="@(pm.jsvalidator ?? "")" data-validationlangkey="@(pm.jsvalidatorlangkey ?? "")" data-validationfield="@(pm.adminlabel)" data-type="text" class="form-control modelcontrol" type="text" id="modelcontrol@(pm.propertyname)" value="@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())" />
+                        break;
+                    case "date":
+                    <input data-validation="@(pm.jsvalidator ?? "")" data-validationlangkey="@(pm.jsvalidatorlangkey ?? "")" data-validationfield="@(pm.adminlabel)" data-type="date" class="form-control modelcontrol" type="text" id="modelcontrol@(pm.propertyname)" value="@( Convert.ToDateTime(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault()).ToShortDateString())" />
+                    break;
+                case "textmultiline":
+                    <textarea data-validation="@(pm.jsvalidator ?? "")" data-validationlangkey="@(pm.jsvalidatorlangkey ?? "")" data-validationfield="@(pm.adminlabel)" data-type="textarea" class="form-control admindescription modelcontrol" id="modelcontrol@(pm.propertyname)">@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())</textarea>
+                    break;
+                case "ckeditor":
+                    <textarea data-validation="@(pm.jsvalidator ?? "")" data-validationlangkey="@(pm.jsvalidatorlangkey ?? "")" data-validationfield="@(pm.adminlabel)" data-type="ckeditor" class="form-control modelcontrol" id="modelcontrol@(pm.propertyname)">@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())</textarea>
+                    break;
+                case "dropdown":
+                    <select id="modelcontrol@(pm.propertyname)"  data-type="dropdown" class="form-control modelcontrol">
+                        @foreach (var r in pm.Datasource())
+                        {
+                            <option data-text="@(r.data)" value="@(r.val)">@(r.data)</option>
+                        }
+                    </select>
+                    break;
+                case "file":
+                    <div class="input-group">
+                        <input data-resetvalue="@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())" data-validation="@(pm.jsvalidator ?? "")"  data-validationlangkey="@(pm.jsvalidatorlangkey ?? "")" data-validationfield="@(pm.adminlabel)" data-type="file" class="form-control modelcontrol" type="text" id="modelcontrol@(pm.propertyname)" value="@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())" />
+                        <span class="input-group-btn">
+                            <a data-name="@(pm.propertyname)" data-modelid="@(pm.id)" data-folder="@(pm.AdminParams()["folder"].ToString())" class="btn btn-default buttonfileselector" id="btfilemodel_@(pm.propertyname)">Seleziona un file dal server</a>
+                            <a data-name="@(pm.propertyname)" data-modelid="@(pm.id)" class="btn btn-default buttonfilereset" id="btresetfilemodel_@(pm.propertyname)">Ripristina</a>
+                            
+                        </span>
+                    </div>
+
+                    break;
+                case "img":
+                    <div class="input-group">
+                        <input data-resetvalue="@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())" data-validation="@(pm.jsvalidator ?? "")" data-type="img"  data-validationlangkey="@(pm.jsvalidatorlangkey ?? "")" data-validationfield="@(pm.adminlabel)" class="form-control modelcontrol" type="text" id="modelcontrol@(pm.propertyname)" value="@(Model.ModelDatas.Where(x => x.name == pm.propertyname).Select(x => x.val).FirstOrDefault())" />
+                        <span class="input-group-btn">
+                            <a data-name="@(pm.propertyname)" data-modelid="@(pm.id)" data-folder="@(pm.AdminParams()["folder"].ToString())" class="btn btn-default buttonimgselector" id="btimgmodel_@(pm.propertyname)">Seleziona un'immagine dal server</a>
+                            <a data-name="@(pm.propertyname)" data-modelid="@(pm.id)" class="btn btn-default buttonimgreset" id="btresetimgmodel_@(pm.propertyname)">Ripristina</a>
+                        </span>
+                    </div>
+                        
+                        <div class="admincontrolimgwrapper">
+                            <span style="color:gray;">Anteprima Immagine</span><br /><br />
+                            @{
+                                <img id="modelcontrolimg@(pm.propertyname)" data-imgdefault="@(pm.AdminParams()["default"].ToString())" data-folder="@(pm.AdminParams()["folder"].ToString())" data-h="@(pm.AdminParams()["imgh"].ToString())" data-w="@(pm.AdminParams()["imgw"].ToString())" />
+                            }
+                        </div>
+                        break;
+                        }
+                    </div>
+
+                                }
+}

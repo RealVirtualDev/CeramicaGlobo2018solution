@@ -1,0 +1,31 @@
+﻿@using WebSite.Models
+@model  BlocchiHome
+@*TEMPLATE 2 COLONNE PER IMMAGINE E 1 COL PER IL TESTO*@
+@*<article>*@
+    <div style="width:100%;" class="row blocco_img2txt1 margin-bottom-20">
+        <div class="col-md-12"><h1>@Model.titolo</h1></div>
+        <div class="col-md-8 col-sm-12 col-12">
+            <img class="img-fluid margin-bottom-60" src="@Model.img" />
+        </div>
+        <div class="col-md-4 col-sm-12 col-12" >
+            @Html.Raw(Model.descrizione)
+            @if (Model.showcontent || !string.IsNullOrEmpty(Model.link))
+            {
+                string link = "/home/" + Model.urlname;
+                string target = "_self";
+
+                if (!string.IsNullOrEmpty(Model.link))
+                {
+                    link = Model.link;
+                    target = (Model.link.Contains("ceramicaglobo.com/") || !(Model.link.Contains("http://") || Model.link.Contains("www."))) ? "_self" : "_blank";
+                }
+
+                <div class="text-right margin-top-30">
+                    <a target="@target" href="@link" class="btn btn-more">@Model.buttonlabel</a>
+                </div>
+            }
+        </div>
+     
+    </div>
+   <div class="w-100"></div>
+@*</article>*@

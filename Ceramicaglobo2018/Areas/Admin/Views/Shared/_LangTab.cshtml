@@ -1,0 +1,11 @@
+﻿@using WebSite.Models
+@model WebSite.Areas.Admin.Models.ViewModels.AdminCommon
+
+   
+<div class="langtabscontainer">
+
+    @foreach (Language l in Model.Language)
+    {
+        <div data-lang="@l.lang" class="langtab" style="background-image: url('/images/lang/@(l.lang).gif');">@l.label</div>
+    }
+</div>

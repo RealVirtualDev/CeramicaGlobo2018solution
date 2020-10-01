@@ -1,0 +1,18 @@
+﻿@using WebSite.Models
+@model List<SectionSlider>
+
+<section>
+    <div class="sectionslider">
+        <div class="sectionslider_inner">
+            @{int idx = 0; }
+            @foreach (SectionSlider s in Model)
+            {
+                <div id="sectionslideritem@(idx+1)" class="sectionslideritem" style="@(idx>0 ? "display:none;" : "")">
+                    <img class="img-fluid imgslider" src="@s.img" />
+                </div>
+                idx++;
+            }
+        </div>
+    </div>
+</section>
+

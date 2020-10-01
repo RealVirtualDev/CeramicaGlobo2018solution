@@ -1,0 +1,22 @@
+﻿@using WebSite.Models
+@model List<Prestazione>
+
+<div class="row margin-top-80">
+    @foreach (Prestazione c in Model)
+    {
+       <a href="@c.pdf" target="_blank" class="col-md-3 item-inline">
+           <div class="row">
+               <div class="col-md-3 col-sm-3 col-3 no-padding">
+                   <img src="@c.img" alt="" class="img-fluid" />
+               </div>
+               <div class="col-md-7 col-sm-7 col-7">
+                   <h2 class="item-titolo">@c.titolo</h2>
+                   <div class="item-sottotitolo">Read More...</div>
+               </div>
+           </div>
+          
+
+        </a>
+    }
+</div>
+

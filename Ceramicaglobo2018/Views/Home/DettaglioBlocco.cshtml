@@ -1,0 +1,26 @@
+﻿@using WebSite.Models
+@using HtmlHelpers
+@model BlocchiHome
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section headerMeta{
+    <title>@(Model.metatitle)</title>
+    <meta name="description" content="@(Model.metadescription)" />
+}
+
+<div class="sitecontent innercontent">
+    <article>
+        <h1 class="sectiontitle">@Model.titolo</h1>
+        <div class="sectiontext text-justify  margin-top-40">
+
+            @if (!string.IsNullOrEmpty(Model.img) && Model.usaimmagineinterna)
+            {
+                <img src="@Model.img" class="img-inline-content" />
+            }
+
+            @Html.FormatContent(Model.content)
+        </div>
+    </article>
+</div>

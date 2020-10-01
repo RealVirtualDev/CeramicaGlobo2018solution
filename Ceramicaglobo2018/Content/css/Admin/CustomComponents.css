@@ -1,0 +1,81 @@
+﻿.FinitureSelectorGroupDiv, .FinitureSelectorItem, FinitureSelectorContentDiv {
+    display: none;
+
+
+
+}
+a{
+    cursor:pointer;
+}
+.FinitureSelectorGroupDiv {
+    padding: 3px;
+    border: dashed 1px #dcdcdc;
+    background-color: #e3f3ff;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+    
+    .FinitureSelectorContentDiv {
+        
+    }
+
+.finitureitembox {
+    border: dashed 1px #dcdcdc;
+    margin: 5px;
+    font-size: 10px;
+    padding: 5px;
+    min-height: 125px;
+}
+
+
+.accessorinoresult{
+padding:20px;
+margin:20px 0 20px 0;
+border:dashed 1px #dcdcdc;
+text-align:center;
+}
+
+.accessorioitem{
+    margin:11px;
+    border:dashed 1px #dcdcdc;
+    padding:10px;
+    font-size:10px;
+    
+}
+    .accessorioitem a {
+        font-size: 13px;
+        cursor:pointer;
+    }
+
+.accessorioicona{
+    width:100px;
+}
+
+a.btcollegaaccessorio 
+{
+    color:green;
+}
+a.btscollegaaccessorio {
+    color: red;
+}
+.accessoriosearchresult a.btscollegaaccessorio {
+    display: none;
+}
+.accessorioselected a.btcollegaaccessorio {
+    display: none;
+}
+
+.divaccessoriselezionati {
+    padding: 3px;
+    border: dashed 1px #dcdcdc;
+    background-color: #e3f3ff;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.accessoritext{
+    overflow:hidden;
+    height:45px;
+    margin-bottom:10px;
+}

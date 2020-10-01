@@ -1,0 +1,40 @@
+﻿@using WebSite.Models
+@model  BlocchiHome
+@*BLOCCO IMMAGINE LARGHEZZA INTERA SENZA TESTI *@
+
+<div class="col-12 blocco_bannerfullnotext">
+    <article>
+
+        @if (Model.showcontent)
+        {
+
+            string link = WebSite.Helpers.LanguageSetting.GetLangNavigation() +"/home/" +  Model.urlname;
+            string target = "_self";
+
+            if (!string.IsNullOrEmpty(Model.link))
+            {
+                link = Model.link;
+                target = "_blank";
+            }
+
+            <a href="@link" target="@target"><img class="img-fluid" src="@Model.img" /></a>
+            @*<div class="text-right">
+                <a target="@target" href="@link" class="btn btn-more">@Model.buttonlabel</a>
+            </div>*@
+        }
+        else if (!Model.showcontent && !string.IsNullOrEmpty(Model.link))
+        {
+            string link = Model.link;
+            string target = "_blank";
+
+            <a target="@target" href="@link"><img class="img-fluid" src="@Model.img" /></a>
+        }
+        else
+        {
+            // solo immagine senza link
+            <img class="img-fluid" src="@Model.img" />
+        }
+    </article>
+</div>
+
+

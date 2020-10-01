@@ -1,0 +1,64 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+@model AdminCommon
+
+<div class="validateWrapper">
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "signupform" }))
+    {
+        <div class="row form-group">
+            <label>Titolo</label>
+            <input class="form-control" type="text" id="tbtitolo" value="@(Model.PageInfo.titolo)" />
+        </div>
+            <div class="row form-group">
+                <label>Contenuto</label>
+                <textarea data-type="ckeditor" class="form-control" style="height:600px" id="tbcontent">@(Html.Raw(Model.PageInfo.content))</textarea>
+            </div>
+                <div class="row form-group">
+                    <label>Meta Page Title</label>
+                    <input class="form-control" type="text" id="tbmetatitle" value="@(Model.PageInfo.metatitle)" />
+                </div>
+                <div class="row form-group">
+                    <label>Meta Description</label>
+                    <textarea class="form-control" style="height:80px" id="tbmetadescription">@(Model.PageInfo.metadescription)</textarea>
+                </div>
+                <div class="row form-group">
+                    <label>Meta Keywords</label>
+                    <textarea class="form-control" style="height:80px" id="tbmetakeywords"> @(Model.PageInfo.metakeywords)</textarea>
+                </div>
+        // MODELLO
+
+        <div class="modelview">
+            @{Html.RenderPartial("_PageModelControls", Model.PageInfo);}
+        </div>
+                // GALLERY
+                if (Model.PageInfo.hasgallery)
+                {
+                    <div class="galleryview">
+                        @{Html.RenderPartial("~/Areas/Admin/Views/GalleryManager/_PageGallery.cshtml", Model.PageInfo.Gallery);}
+                    </div>
+                }
+
+                // FILES
+                if (Model.PageInfo.hasfiles)
+                {
+                    <div class="filesview">
+                        @{Html.RenderPartial("~/Areas/Admin/Views/FilesManager/_PageFiles.cshtml", Model.PageInfo.Files);}
+                    </div>
+                }
+
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <a class="btn btn-default btn-annulla">CHIUDI</a>
+                                <a class="btn btn-primary btn-salva">SALVA</a>
+                            </div>
+                        </div>
+
+                                }
+</div>
+<script src="/Content/Scripts/Admin/pageEditor.js?v=2"></script>
+<script>
+    initEditor(JSON.parse('@(Html.Raw(Model.jsonData))'));
+</script>
+

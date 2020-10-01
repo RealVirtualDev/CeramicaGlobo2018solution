@@ -1,0 +1,73 @@
+﻿@using WebSite.Helpers;
+
+@{
+    LanguageSetting.Lang = ViewContext.RouteData.Values["lang"] !=null ? ViewContext.RouteData.Values["lang"].ToString() : "it";
+}
+
+<!DOCTYPE html>
+<html lang="@WebSite.Helpers.LanguageSetting.Lang">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    @RenderSection("headerMeta", false)
+    <link href="~/bundles/css/all.css" rel="stylesheet" />
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '597184900760665');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+
+</head>
+<body>
+    <div class="container-fluid">
+        @{Html.RenderAction("GetHeader", "Header");}
+        <div class="no-gutters">
+
+            @RenderBody()
+            <a class="btn-goup"></a>
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
+ 
+    <script src="~/bundles/scripts/all.js?v=2"></script>
+    @*<script type="text/javascript">
+        if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent))
+            document.write('<link href="~\/bundles\/css\/all.css" rel="stylesheet" \/>');
+        else {
+            load_css_async('/bundles/css/all.css');
+        }
+       
+    </script>*@
+
+
+
+    @RenderSection("footerScript", false)
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+    @*<script async src="https://www.googletagmanager.com/gtag/js?id=UA-294714-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-294714-1');
+    </script>*@
+
+
+ 
+</body>
+</html>

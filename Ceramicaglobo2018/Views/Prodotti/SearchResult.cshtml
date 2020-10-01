@@ -1,0 +1,54 @@
+﻿@using WebSite.Models
+@using WebSite.Infrastructure
+
+
+@model List<Prodotti>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title>Search Result</title>
+
+}
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    <nav>
+        <div class="pagebreadcrumb">
+            @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <span>@("txt_risultatocerca".Translate())</span>
+        </div>
+    </nav>
+    <section>
+        <h1 class="sectiontitle">@ViewBag.titolo</h1>
+        <div class="row margin-top-60">
+            @foreach (Prodotti p in Model)
+            {
+                <div class="col-md-2 col-sm-4 col-6  item-column-prodotto text-center">
+                    <a class="d-block" href="@((p.lang=="it" ? "/collezioni/" : "/" + p.lang + "/collections/") +  p.collezioneurlname + "/" + p.categoria + "/" + p.codice)"><img src="@p.icona" alt="" class="img-fluid" /></a>
+                    
+                    @if (p.basecm > 0)
+                    {
+                        <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + " " + (int)p.basecm + " x " + (int)p.altezzacm + "<br/>" + p.titolo)</h2>
+                    }
+                    else
+                    {
+                        <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + "<br/>" + p.titolo)</h2>
+                    }
+
+                    <div class="item-sottotitolo"><a href="@((p.lang=="it" ? "/collezioni/" : "/" + p.lang + "/collections/") + p.collezioneurlname)">@p.collezionename</a></div>
+                    <div class="comparebuttonwrapper d-none d-sm-block">
+                        <label><input data-igprodotto="@p.itemgroup" data-icoprodotto="@p.icona" type="checkbox" class="cbcompara" />@("lbl_confronta".Translate())</label>
+                    </div>
+                </div>
+            }
+            @if (Model.Count() == 0)
+            {
+                <div class="emptysearch col-md-12">
+                    @("txt_emptysearch".Translate())
+                </div>
+            }
+        </div>
+
+
+    </section>
+</div>

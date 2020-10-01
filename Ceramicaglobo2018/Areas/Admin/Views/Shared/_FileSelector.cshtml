@@ -1,0 +1,87 @@
+﻿@using Admin.Models
+@model FileSelectorState
+
+<div id="fileselectorpopup">
+
+    <div id="fileselectorwrapper">
+        <div id="windowbar">
+            <div class="floading" style="float:left;margin-top:-5px;display:none;"><img src="/images/ajax/trasp.gif" /></div>
+            <a id="btchiudipopup">X Chiudi</a>
+        </div>
+        <div style="padding:20px;">
+            <div id="addressbar row">
+                <div class="input-group">
+                   
+                <input type="text" ID="tbaddress" class="form-control" />
+                    <span class="input-group-btn">
+                        <a ID="btgoaddress" class="fileselectorbutton btn btn-primary">GO</a>
+                    </span>
+                </div>
+                
+            </div>
+            <div class="row">
+                @*COL SX*@
+                <div class="col-md-6">
+                    <div class="margin-top-20">
+                        <label>Nuova cartella</label>
+                        <div id="divnewfolder" class="input-group">
+
+                            <input type="text" id="tbnewfolder" class="form-control" placeholder="Nome della nuova cartella...">
+                            <span class="input-group-btn">
+                                <a ID="btnewfolder" class="btn btn-primary btcreafolder">CREA</a>
+                            </span>
+                        </div>
+                        
+                       <div class="margin-top-25">
+                           <label>Upload files dal tuo pc</label>
+                           <div class="uploadwrapper"><input type="file" ID="fufilesel" /></div>
+                       </div>
+                       
+                        <div id="imgpreview">
+
+                        </div>
+                    </div>
+                </div>
+                @*COL DX*@
+                <div class="col-md-6">
+                    <div id="fileselectorlist" class="margin-top-35">
+                        @*LISTA FILES*@
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div style="clear: both">
+                @*<asp:UpdatePanel runat="server" ID="updnas">
+                    <ContentTemplate>
+                        <asp:Button CssClass="nascondi" runat="server" ID="btchangesetting" />
+                        <asp:Button CssClass="nascondi" runat="server" ID="btupload" OnClick="btupload_Click" />
+                        <asp:Button CssClass="nascondi" runat="server" ID="btupdate" OnClick="btupdate_Click" />
+                        <asp:Button CssClass="nascondi" runat="server" ID="bteliminafs" OnClick="bteliminafs_Click" />
+                        <asp:Button CssClass="nascondi" runat="server" ID="bteliminafolder" />
+                        <asp:HiddenField runat="server" ID="hfstartpath" />
+                        <asp:HiddenField runat="server" ID="hfcontrolname" />
+                        <asp:HiddenField runat="server" ID="hfimgcontrolname" />
+                        <asp:HiddenField runat="server" ID="hfselected" />
+                        <asp:HiddenField runat="server" ID="hfimgh" />
+                        <asp:HiddenField runat="server" ID="hfimgw" />
+                        <asp:HiddenField runat="server" ID="hfallonewfolder" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>*@
+
+
+            </div>
+        </div>
+        <ul class="custommenu">
+            <li class="btctxapri" data-action="apri">Apri</li>
+            <li class="btctxelimina" data-action="elimina">Elimina</li>
+        </ul>
+    </div>
+</div>
+<script>
+   // console.info(Model.jsonData)
+
+    fileSelector.setting = JSON.parse('@(Html.Raw(Model.jsonData))');
+    fileSelector.show();
+
+</script>

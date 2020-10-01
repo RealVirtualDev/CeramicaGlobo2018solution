@@ -1,0 +1,116 @@
+﻿.jlupload_outer
+{
+    position: relative;
+    border-radius: 3px;
+    border: solid 1px #b9b9b9;
+    padding: 3px 3px 3px 10px;
+    width: 325px;
+}
+
+.jlupload_label
+{
+    float: left;
+    width: 230px;
+    font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    font-size:9pt;
+    color:gray;
+    line-height:30px;
+    height:28px;
+    overflow:hidden;
+    
+    
+}
+
+.jlupload_button
+{
+    float: right;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 75px;
+    font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    font-size:9pt;
+    color:gray;
+    background-color:#dcdcdc;
+    padding:5px;
+    text-align:center;
+    /*height:18px;*/
+    line-height:17px;
+
+}
+
+.jlupload_outer input
+{
+    display: none !important;
+    
+}
+
+.jlupload_progress_outer
+{
+    position:relative;
+    border-radius: 3px;
+    padding: 1px;
+    width: 340px;
+    background-color:#dcdcdc;
+   height:38px;
+   margin-top:5px;
+}
+
+.jlupload_progressbar
+{
+    position:absolute;
+    top:3px;
+    left:3px;
+    border-radius: 2px;
+    background-color:#ecf9ff;
+    width:334px;
+    /*width:100%;*/
+    height:31px;
+    line-height:30px;
+    font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    font-size:11px;
+}
+
+.jlupload_progressfilelabel
+{
+    color:gray;
+    position:absolute;
+    top:11px;
+    left:10px;
+    font-size:11px;
+    font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    overflow:hidden;
+    width:220px;
+    white-space:nowrap;
+    direction: rtl;
+    text-align:left;
+}
+
+.jlupload_progressinfolabel
+{
+    color:#bbc7fc;
+    position:absolute;
+    top:5px;
+    right:40px;
+    font-size:11px;
+    font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    line-height:30px;
+    text-align:center;
+    
+    
+    
+    
+}
+
+.jlupload_progresscancel
+{
+    position:absolute;
+    right:10px;
+    top:10px;
+    font-size:14px;
+    text-align:right;
+    font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+   color:gray;
+   font-weight:bold;    
+   
+}
+

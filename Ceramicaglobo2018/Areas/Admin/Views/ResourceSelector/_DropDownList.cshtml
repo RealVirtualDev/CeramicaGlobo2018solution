@@ -1,0 +1,30 @@
+﻿@using Admin.Models
+@using Newtonsoft.Json
+@model DropDownListModel
+
+<select data-controlname="@Model.propertyName" data-groupname="@Model.groupName" data-groupmaster="@Model.groupMaster" data-groupparent="@Model.groupParent" data-rname="@Model.rname" id="modelcontrol@(Model.propertyName)" data-type="res_dropdownlist" class="form-control modelcontrol">
+   @if (Model.emptyText != "")
+   {
+    <option value="0">@Model.emptyText</option>
+   }
+    @if (Model.groupMaster == true || Model.groupName == "")
+    {
+        foreach (DropDownListItem i in Model.items)
+        {
+            if (i.selected)
+            {
+                var b = "pippo";
+            }
+            <option @(i.selected ? "selected" : "") value="@i.resultValue">@i.displayValue</option>
+        }
+    }
+
+</select>
+<script>
+    // SALVO IL DATASOURCE LATO CLIENT
+    ResourceSelector.setDataSource("@Model.propertyName",@Html.Raw(Json.Encode(Model.items)));
+    @if(Model.groupMaster==false && Model.groupName != "")
+    {
+        <text>ResourceSelector.DropDownList.fillByParent("@Model.groupParent", "@Model.propertyName");</Text>
+    }
+</script>

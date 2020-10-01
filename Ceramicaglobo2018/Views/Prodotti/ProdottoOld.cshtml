@@ -1,0 +1,230 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@using HtmlHelpers
+@model  ProdottoPage
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title>@(Model.Prodotto.titolo)</title>
+    <meta name="description" content="@(Model.Prodotto.descrizione)" />
+    <link href="/Content/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="/Content/css/jssocials.css" rel="stylesheet" />
+    <link href="/Content/css/jssocials-theme-flat.css" rel="stylesheet" />
+    <meta property="og:url" content="@(Request.Url.ToString())">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="@Model.Prodotto.titolo">
+    <meta property="og:description" content="@Model.Prodotto.descrizione">
+    <meta property="og:image" content="https://www.ceramicaglobo.com@(Model.Prodotto.imgmain)">
+}
+
+<div class="sitecontent innercontent prodottowrapper" style="margin-top:180px;">
+    <nav>
+        <div class="pagebreadcrumb">
+            @("breadcrumb_seiin".Translate()): @Html.Raw( Model.breadcrumb)
+        </div>
+    </nav>
+    <article>
+        
+       <div class="sectiontext text-justify  margin-top-40">
+       <div class="margin-top-50 margin-bottom-40">
+           <div class="prodottocollezionetag d-none d-sm-inline-block">
+               <a data-link="@(Model.backurl)" onclick="goback('@(Model.backurl)')" class="text-hide pointer">COLLECTIONS</a>
+               <span>@("prodcollezione".Translate().ToUpper())</span>
+           </div>
+           <div class="prodottocollezione">@Model.Prodotto.collezionename</div>
+       </div>
+           
+            <h1 class="sectiontitle">@(Model.Prodotto.titolo + " " + Model.Prodotto.codice)</h1>
+             @*B1*@
+            <div class="row margin-top-20">
+                <div class="col-sm-6 descrizionelight" style="border-right:solid 1px #dcdcdc;">
+                    <div class="prodottocol1">
+                        <p>@Html.Raw(Model.Prodotto.descrizione)</p>
+                        <img class="img-fluid margin-top-60 margin-bottom-30" alt="@(Model.Prodotto.titolo + " " + Model.Prodotto.codice)" src="@Model.Prodotto.imgmain" />
+                        <div class="sharelink text-right" style="font-size:14px;"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6 ">
+                    <div class="text-center margin-bottom-40">
+                        <img alt="@(Model.Prodotto.titolo + " " + Model.Prodotto.codice)" src="@Model.Prodotto.pianta" />
+                     
+                    </div>
+                    <div class="row">
+                        <div class="prodottocol2 row">
+                            @{ 
+                                string href = "/files/" + LanguageSetting.Lang + "/" + Model.Prodotto.itemgroup + "/{0}";
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.scheda))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a href="@(string.Format(href,"scheda"))" class="btfileprodotto btscheda pointer">@("prodscheda".Translate())</a>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.istruzioni))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a href="@(string.Format(href,"istruzioni"))" class="btfileprodotto btistruzioni">@("prodistruzioni".Translate())</a>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.scassi))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a href="@(string.Format(href,"scassi"))" class="btfileprodotto btscassi">@("prodscassi".Translate())</a>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.capitolato))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a href="@(string.Format(href,"capitolato"))" class="btfileprodotto btcapitolato">@("prodcapitolato".Translate())</a>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.prestazione))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a href="@(string.Format(href,"dop"))" class="btfileprodotto btdop">D.O.P.</a>
+                                </div>
+                            }
+                            @*LOGGATO*@
+                            @{ 
+                                string piece = Model.isLogged ? "href=/files/" + LanguageSetting.Lang + "/" + Model.Prodotto.itemgroup + "/{0}" : "onclick=showLogin('" + Request.RawUrl + "')";
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.cad))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a @(string.Format(piece,"cad"))  class="btfileprodotto btcad pointer">@("prodfilecad".Translate())</a>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.f3ds))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a @(string.Format(piece,"3ds"))  class="btfileprodotto bt3ds pointer">@("prodfile3ds".Translate())</a>
+                                </div>
+                            }
+                          
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.revit))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a @(string.Format(piece,"revit"))  class="btfileprodotto btrevit pointer">Revit</a>
+                                </div>
+                            }
+                           
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.archicad))
+                            {
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <a @(string.Format(piece,"archicad"))  class="btfileprodotto btarchicad pointer">Archicad</a>
+                                </div>
+                            }
+                           
+                            @if (!string.IsNullOrEmpty(Model.Prodotto.sketchup))
+                            {
+                                 <div class="col-12 col-sm-12 col-md-6">
+                                <a @(string.Format(piece,"sketchup"))  class="btfileprodotto btsketchup pointer">Sketchup</a>
+                            </div>
+                            }
+                           
+                        </div>
+                       
+                    </div>
+                    @*WATERLABEL*@
+                    @if (Model.Prodotto.waterlabel > 0)
+                    {
+                        <div class="waterlabelwrapper"><div class="waterlabel waterlabelmin" onclick="$('.waterlabelfull').toggle()">@(Model.Prodotto.waterlabel)</div><div class="waterlabelfull"><div class="waterlabelfulltext">@(Model.Prodotto.waterlabel)</div></div></div>
+                    }
+
+                </div>
+            </div>
+            @*B2*@
+            <div class="row finiturelist">
+               
+              
+                    @foreach(FinitureGruppi g  in Model.GruppiFiniture)
+                    {
+                        <div class="col-12">
+                            <h2 class="title-group-small text-center">@g.titolo</h2>
+                        </div>
+                            <div class="col-12">
+                                <div class="row ">
+                                    @foreach (Finiture f in Model.Finiture.Where(x => x.gruppoitemgroup == g.itemgroup.ToString()).ToList())
+                                    {
+                                        
+                                        string piantafname = string.Format("/public/resource/prodotti/finiture/{0}/{1}/{2}", Model.Prodotto.collezioneurlnameit.Replace("-", ""), Model.Prodotto.codice, Model.Prodotto.codice + f.desinenzafile);
+                                        bool fexist = System.IO.File.Exists(Server.MapPath(piantafname));
+
+
+                                        <div class="col-sm-4 col-6 col-md-3 col-lg-3 finiturewrapper">
+                                            <div data-path="@piantafname" data-pianta="@fexist.ToString().ToLower()" id="ig@(f.itemgroup)" class="finitura-item">
+                                                <img style="display:inline-block" class="img-finitura" src="@f.img" />
+                                                <div class="text-finitura" style="display:inline-block">@f.titolo</div>
+                                            </div>
+                                            
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                       
+                    }
+                
+
+                <div class="finiturapopover">
+                    <img class="imgpiantafiniura" src="~/public/resource/prodotti/finiture/bowlplus/BPB03/BPB03-camoscio.jpg" />
+                    <img class="imgarrowfinitura" src="~/images/prodotti/arrowfiniture.png" />
+                </div>
+
+            </div>
+            @if (Model.Accessori.Count > 0)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title-group-small w-100 d-block margin-top-60">@("prodaccessoriabbinati".Translate())</h2>
+                        <div class="row">
+                            @foreach (Prodotti p in Model.Accessori)
+                            {
+
+                                <div class="col-md-2 col-sm-4 col-6 item-column-prodotto text-center nolink">
+                                    <img src="@p.icona" alt="" class="img-fluid" />
+                                    <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + "<br/>" + p.titolo)</h2>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </article>
+   
+</div>
+
+@section footerScript{
+<script src="~/Content/Scripts/loginPopup.js?v=2"></script>
+<script src="/Content/Scripts/jssocials.js"></script>
+    <script>
+        var goback = function (url) {
+
+            if (document.referrer.indexOf("ceramicaglobo.com/") || document.referrer.indexOf("globo.realtest.it/")) {
+                window.history.back();
+            }
+            else {
+                window.location.href == url;
+            }
+
+        }
+
+        $(".sharelink").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shareIn: "popup",
+            shares: ["facebook", "twitter", "googleplus", "pinterest", "email"]
+        });
+    </script>
+
+
+           
+
+
+}

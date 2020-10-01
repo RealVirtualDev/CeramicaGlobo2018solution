@@ -1,0 +1,72 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@using HtmlHelpers
+
+@model TipologieProdotti
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title>@Model.Metatitle</title>
+    <meta name="description" content="@(Model.Metadescription)" />
+}
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    <nav>
+        <div class="pagebreadcrumb">
+            @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <a href="@(Model.TipologieLink)">@("menu_tipologieprodotti".Translate())</a> | <span>@Model.TipologiaName</span>
+        </div>
+    </nav>
+    <section>
+        <div class="margin-top-40">
+            <a href="@(Model.TipologieLink)" class="text-hide btback">COLLECTIONS</a>
+            <h1 class="sectionproducttitle">@Model.TipologiaName</h1>
+        </div>
+      
+        <div class="row margin-top-60">
+            @foreach (Prodotti p in Model.Prodotti)
+            {
+                <div id="div@(p.codice)" class="col-md-2 col-sm-4 col-6 item-column-prodotto text-center">
+                    <a class="d-block" href="@(Model.TipologieLink + "/" + Model.TipologiaUrlname + "/" + p.collezioneurlname + "/" + p.codice)"><img src="@p.icona" alt="" class="img-fluid" /></a>
+                    @if (p.basecm > 0)
+                    {
+                        <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + " " + (int)p.basecm + " x " + (int)p.altezzacm + "<br/>" + p.titolo)</h2>
+                    }
+                    else
+                    {
+                        <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + "<br/>" + p.titolo)</h2>
+                    }
+                    <div class="item-sottotitolo"><a href="@((p.lang=="it" ? "/collezioni/" : "/" + p.lang + "/collections/") + p.collezioneurlname)">@p.collezionename</a></div>
+                    <div class="comparebuttonwrapper d-none d-sm-block">
+                        <label><input data-igprodotto="@p.itemgroup" data-icoprodotto="@p.icona" type="checkbox" class="cbcompara" />@("lbl_confronta".Translate())</label>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</div>
+
+@section footerScript{
+    @*<script>
+          $(document).ready(function () {
+              setTimeout(function () {
+                  var prod = querystring("p")[0];
+                  if (prod != undefined && prod != "") {
+                      let scrollto = $("#div" + prod).offset().top;
+                      //$(document).scrollTop(scrollto);
+
+                      //$('html, body').animate({ scrollTop: scrollto }, 'slow');
+                        $('html, body').scrollTop(scrollto);
+
+                      //console.info(scrollto);
+                  }
+
+              }, 50)
+
+          })
+
+    </script>*@
+}

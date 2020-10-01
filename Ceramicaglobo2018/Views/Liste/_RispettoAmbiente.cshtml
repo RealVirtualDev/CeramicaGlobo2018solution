@@ -1,0 +1,22 @@
+﻿@using WebSite.Models
+@model List<RispettoAmbiente>
+
+
+    @foreach (RispettoAmbiente r in Model)
+    {
+        <article>
+            <div class="row margin-top-40  item-rispettoambiente">
+                <div class="col-md-12">
+                    <h1>@r.titolo</h1>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-fluid" src="@r.img" alt="@r.titolo" />
+                </div>
+                <div class="col-md-7 sectiontext text-justify">
+                    @Html.Raw(r.content)
+                </div>
+            </div>
+        </article>
+        
+    }
+

@@ -1,0 +1,12 @@
+﻿@using WebSite.Models
+@model List<Certificati>
+
+<div class="row margin-top-80">
+    @foreach(Certificati c in Model)
+    {
+        <div class="col-md-3 col-6 col-sm-4 item-column">
+            <a class="d-block" href="@c.pdf" target="_blank"><img src="@c.img" alt="" class="img-fluid" /></a>
+            <h2 class="item-titolo">@c.titolo</h2>
+        </div>
+    }
+</div>

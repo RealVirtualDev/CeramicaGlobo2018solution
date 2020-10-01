@@ -1,0 +1,55 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+@model UtentiNewsletter
+
+
+<div class="validateWrapper">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "signupform" }))
+    {
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <label>Ragione Sociale</label>
+            <input class="form-control" type="text" id="tbragionesociale" value="@(Model.ragionesociale)" />
+        </div>
+
+        <div class="col-md-12 form-group">
+            <label>Email</label>
+            <input data-validation="required,email" data-validationlangkey="" data-validationfield="Email" class="form-control" type="text" id="tbemail" value="@(Model.email)" />
+        </div>
+        <div class="col-md-3 form-group">
+            <label>Lingua</label>
+            <input maxlength="2" data-validation="required" data-validationlangkey="" data-validationfield="Lingua" class="form-control" type="text" id="tblingua" value="@(Model.lang)" />
+        </div>
+        <div class="col-md-12 form-group">
+            <label>Professione</label>
+            <input data-validation="required" data-validationlangkey="" data-validationfield="professione" class="form-control" type="text" id="tbprofessione" value="@(Model.professione)" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label>Attivo</label>
+            <select data-validationlangkey="" data-validationfield="attivo" id="ddlattivo" class="form-control">
+                <option @(!Model.attivo ? "selected" : "") value="0">No</option>
+                <option @(Model.attivo ? "selected" : "") value="1">Si</option>
+            </select>
+        </div>
+        <div class="col-md-3 form-group">
+            <label>Data Registrazione</label>
+            <input data-validation="required" data-validationlangkey="" data-validationfield="Data Registrazione" class="form-control" type="date" id="tbdata" value="@(Model.data.ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-12 text-right">
+            <a class="btn btn-default btn-annulla">ANNULLA</a>
+            <a class="btn btn-primary btn-salva">SALVA</a>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    }
+</div>
+<script src="/Content/Scripts/Admin/utentinewsletterEditor.js?v=2"></script>
+<script>
+    initEditor('@(Html.Raw(Json.Encode(Model)))');
+</script>

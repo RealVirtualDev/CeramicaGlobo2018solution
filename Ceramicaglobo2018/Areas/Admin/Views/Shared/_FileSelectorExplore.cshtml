@@ -1,0 +1,12 @@
+﻿@*VIEW DEI FILES NELLA CARTELLA*@
+@using Admin.Models
+@model List<FileSelectorItem>
+
+@foreach (FileSelectorItem f in Model)
+{
+    <div class="fileitem" data-ftype="@(f.type)"
+        data-fname="@(f.filename)" style="background-image: url('/images/icofiles/@(f.img)')">
+        @(f.filename)
+    </div>
+}
+

@@ -1,0 +1,33 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+@model AdminCommon
+
+@{
+    ViewBag.Title = "Pages";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="contenteditor">
+    @{Html.RenderPartial("_LangTab", Model);}
+    <div class="roundboxlang" style="">
+
+        <div class="pageeditor"></div>
+
+    </div>
+</div>
+
+@*GRIGLIA*@
+<div id="grid"></div>
+
+
+@section footerScript
+{
+
+@*FILESELECTOR*@
+<link href="/Content/css/Admin/fileSelector.css" rel="stylesheet" />
+<script src="/Content/Scripts/Admin/fileSelector.js?v=1"></script>
+<script src="/Content/Scripts/Admin/page.js?v=2"></script>
+<script>
+
+</script>
+}

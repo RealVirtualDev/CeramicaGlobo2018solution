@@ -1,0 +1,101 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@using HtmlHelpers
+@model  CollezioneProdotti
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title>@(Model.Collezione.metatitle)</title>
+    <meta name="description" content="@(Model.Collezione.metadescription)" />
+}
+
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    <nav>
+        <div class="pagebreadcrumb">
+            @("breadcrumb_seiin".Translate()): <a href="/">Ceramica Globo</a> | <a href="@(Model.Collezione.lang=="it" ? "/collezioni" : ("/" + Model.Collezione.lang + "/collections"))">@("menu_collezioni".Translate())</a> | <a href="@Model.CollezioneLink">@Model.Collezione.titolo</a> | <span>@Model.CategoriaName</span> 
+        </div>
+    </nav>
+    <article>
+       
+        <div class="margin-top-40">
+            <a href="@Model.CollezioneLink" class="text-hide btback">COLLECTIONS</a>
+            
+            <h1 class="sectionproducttitle">@(Model.CategoriaName + " " + (Model.CategoriaName==Model.Collezione.titolo ? "" : Model.Collezione.titolo))</h1>
+        </div>
+        @*<div class="sectiontext text-justify  margin-top-40 margin-bottom-60">
+            @{
+                if (Model.Collezione.content.Split('.').Count() > 1)
+                {
+                    @Html.FormatContent(Model.Collezione.content.Split('.')[0] + ".");
+                    <span class="readmorelink">... <a>@("btreadmore".Translate())</a></span>
+                    <div class="readmorecontent">
+                        @Html.FormatContent(Model.Collezione.content.Substring(Model.Collezione.content.IndexOf('.')+1).Trim())
+                        
+                    </div>
+                }
+                else
+                {
+                    Html.FormatContent(Model.Collezione.content);
+                }
+            }
+           
+
+        </div>*@
+    </article>
+   @foreach(int ig in Model.Sottocategorie.Keys)
+   {
+       <section>
+           <h2 class="title-group">
+               @Model.Sottocategorie[ig]
+           </h2>
+           @*prodotti*@
+           <div class="row">
+               @foreach (Prodotti p in Model.Prodotti.Where(x=>x.sottocategoria.StartsWith(ig.ToString()+"|")))
+               {
+                   <a href="#@(p.codice)"></a>
+                   <div id="div@(p.codice)" class="col-md-2 col-sm-4 col-6 item-column-prodotto text-center">
+                       <a class="d-block" href="@(Model.CollezioneLink + "/" + Model.CategoriaUrlName + "/" + p.codice)"><img src="@p.icona" alt="" class="img-fluid" /></a>
+                       @if (p.basecm > 0)
+                    {
+                           <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + " " + (int)p.basecm + " x " + (int)p.altezzacm + "<br/>" + p.titolo)</h2>
+                       }
+                       else
+                       {
+                           <h2 class="item-titolo text-center">@Html.Raw(p.codiceCompleto + "<br/>" + p.titolo)</h2>
+                       }
+                       <div class="comparebuttonwrapper d-none d-sm-block">
+                           <label><input data-igprodotto="@p.itemgroup" data-icoprodotto="@p.icona" type="checkbox" class="cbcompara" />@("lbl_confronta".Translate())</label>
+                       </div>
+                   </div>
+               }
+           </div>
+       </section>
+   }
+</div>
+
+@section footerScript{
+  <script>
+      //$(document).ready(function () {
+      //    setTimeout(function () {
+      //        var prod = querystring("p")[0];
+      //        if (prod != undefined && prod != "") {
+      //            let scrollto = $("#div" + prod).offset().top;
+      //            //$(document).scrollTop(scrollto);
+
+      //            //$('html, body').animate({ scrollTop: scrollto }, 'slow');
+      //            $('html, body').scrollTop(scrollto);
+
+      //            //console.info(scrollto);
+      //        }
+
+      //    }, 50)
+
+      //})
+
+</script>
+}

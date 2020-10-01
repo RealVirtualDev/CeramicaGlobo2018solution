@@ -1,0 +1,43 @@
+﻿@using WebSite.Models
+@model List<Finiture>
+    <div id="modelcontrolfiniture" data-type="customcomponent" >
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label>Cerca Finitura</label> ( <a onclick="CustomComponents.FinitureSelector.resetAll()">Ripristina Tutto</a> )
+                <input type="text" class="form-control finituresearch" placeholder="Per cercare Scrivi il codice, il gruppo o la finitura" />
+            </div>
+        </div>
+
+        @foreach (Finiture g in Model.GroupBy(x => x.gruppo).Select(x => x.First()).ToList())
+        {
+            <div data-selected="false" data-groupraw="@(g.gruppo)" data-group="@(g.gruppo.ToLower())" class="FinitureSelectorGroupDiv">
+                <input class="cbfinituragruppo" data-select="group" data-groupraw="@(g.gruppo)" data-group="@(g.gruppo.ToLower())" style="margin-right:10px;" type="checkbox" id="cballgroup@(g.gruppoitemgroup)" />
+                @g.gruppo.Split('|')[1] (<a onclick="CustomComponents.FinitureSelector.resetGroup('@(g.gruppo.ToLower())')">Ripristina</a>)
+            </div>
+            <div data-selected="false" class="row FinitureSelectorContentDiv" data-groupraw="@(g.gruppo)" data-group="@(g.gruppo.ToLower())">
+                @foreach (Finiture f in Model.Where(x => x.gruppo == g.gruppo).OrderBy(x => x.codice).ToList())
+                {
+                    <div data-element="@(f.itemgroup)" data-groupraw="@(g.gruppo)" data-group="@(g.gruppo.ToLower())" data-codice="@(f.codice.ToLower())" data-testo="@(f.titolo.ToLower())" class="col-md-3 FinitureSelectorItem" data-selected="false">
+                        <div class="row finitureitembox">
+                            <div class="col-md-12" style="padding-top:5px;">
+                                <input class="cbfinituraitem" data-select="element" data-original="@(f.selected)" data-groupraw="@(g.gruppo)" data-group="@(f.gruppo.ToLower())" data-element="@(f.itemgroup)" type="checkbox" @(f.selected ? "checked" : "") />
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <img style="border:solid 1px #dcdcdc;width:30px;margin-bottom:5px;" src="@(f.img)" />
+                            </div>
+                            <div class="col-md-12 text-center" style="padding-top:10px;border-top:dashed 1px #dcdcdc">
+                                Cod. @(f.codice)<br />
+                                @(Html.Raw(f.titolo.Replace("\n", "<br/>")) )
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        }
+    </div>
+   
+<script>
+    CustomComponents.FinitureSelector.init();
+</script>

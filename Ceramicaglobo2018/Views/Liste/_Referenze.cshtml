@@ -1,0 +1,27 @@
+﻿@using WebSite.Models
+@using WebSite.Infrastructure
+@model List<Referenze>
+
+
+@foreach (String gruppo in Model.Select(x=>x.gruppo).Distinct())
+{
+    <section>
+        <div class="row margin-top-40  item-referenze">
+            <div class="col-md-12">
+                <h1>@(gruppo.Translate().ToUpper())</h1>
+            </div>
+            <div class="w-100"></div>
+            @foreach (Referenze r in Model.Where(x=>x.gruppo==gruppo))
+            {
+                <div class="col-md-6 item-referenze-col">
+                    <img class="img-fluid" src="@r.img" alt="@r.titolo" />
+                    <div class="item-referenze-titolo">
+                        @r.titolo
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+}
+

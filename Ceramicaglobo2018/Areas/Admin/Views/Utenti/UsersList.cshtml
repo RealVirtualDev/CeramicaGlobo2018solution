@@ -1,0 +1,27 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+
+@{
+    ViewBag.Title = "Lista Utenti";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="contenteditor">
+    <div class="roundbox" style="">
+
+        <div class="pageeditor"></div>
+
+    </div>
+</div>
+<div class="info">
+    <a class="btn btn-primary" href="/admin/utenti/getcsv">SCARICA CSV</a>
+</div>
+@*GRIGLIA*@
+<div id="grid"></div>
+
+@section footerScript
+{
+
+    <script src="/Content/Scripts/Admin/utenti.js"></script>
+
+}

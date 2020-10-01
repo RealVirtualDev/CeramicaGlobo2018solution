@@ -1,0 +1,13 @@
+﻿@using WebSite.Models
+@model List<Comunicazione>
+
+<div class="row margin-top-80">
+    @foreach (Comunicazione c in Model)
+    {
+        <div class="col-md-3 item-column">
+            <a class="d-block" href="@c.pdf" target="_blank"><img src="@c.img" alt="" class="img-fluid" /></a>
+            <h2 class="item-titolo">@c.titolo</h2>
+            <div class="item-sottotitolo">@c.sottotitolo</div>
+        </div>
+    }
+</div>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="/contents/dist/scripts/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        //http://docs.ckeditor.com/#!/guide/dev_file_browser_api
+
+        $(document).ready(function () {
+
+        })
+
+        ret = function () {
+            // ckeditor manda un parametro CKEditorFuncNum
+            // firma del metodo  window.opener.CKEDITOR.tools.callFunction(CKEditorFuncNum,URL,[MSG])
+            window.opener.CKEDITOR.tools.callFunction(1, "http://localhost:3622/MyFiles/files/_6210056.jpg")
+            window.close();
+            //Se uso la tab upload il server deve ritornare una stringa come questa
+            /*output = <html><body><script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('.$callback.', "'.$url.'","'.$msg.'");</ script></body></html>;*/
+
+        }
+    </script>
+</head>
+<body>
+    <a onclick="ret()">Test</a>
+</body>
+</html>

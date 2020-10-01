@@ -1,0 +1,428 @@
+﻿.jlgrid_toolbar_lusigrid
+{
+	background-color:white;
+}
+
+#jlgrid_dragger_lusigrid{
+    padding:10px 10px 10px 30px;
+    width:100px;
+    height:15px;
+    border:solid 1px #dcdcdc;
+    background-color:white;
+    background-image:url('/images/jltable/draghandle.png');
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+}
+
+.dragoverdiv
+{
+    z-index:10000;
+    border:none;
+}
+
+#jlgrid_imagedraglayer_lusigrid
+{
+
+    background-image:url('/images/jltable/arrowdrag.png');
+    background-repeat:no-repeat;
+
+}
+
+
+.jlgrid_draghandle_lusigrid
+{
+    margin-left:10px;
+    height:23px;
+    width:11px;
+    background-image:url('/images/jltable/draghandle.png');
+    background-repeat:no-repeat;
+}
+
+.jlgrid_dragoverdiv_lusigrid
+{
+    border:none;
+}
+.jlgrid_dragoverdiv_active_lusigrid 
+{
+    /*background-color:red;*/
+    /*border-bottom:solid 1px black !important;*/
+}
+
+ #grid
+        {
+            font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            font-size:10px;
+            border-radius:10px 10px 0px 0px;
+            border:solid 1px #b7b7b7;
+            box-shadow: -3px 3px 5px #b7b7b7;
+            margin:auto;
+            margin-top:20px;
+            width:100%;
+            min-width:950px;
+            position:relative;
+        }
+      
+        #grid thead th
+        {
+            font-family:Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            height:25px;
+            border-bottom:solid 1px #b7b7b7;
+
+            background-color:#eeeeee;
+            margin-top:0px;
+            font-size:13px;
+            font-weight:normal;
+            text-transform:uppercase;
+            color:#808080;
+
+        }
+        
+        .jlgrid_selectedrow_lusigrid
+        {
+                /*background-color:#f2f2ff !important;*/
+        }
+      
+        .jltable_body_tr_lusigrid:hover
+        {
+            background-color:#f3f3f3 !important;
+        }
+        .inside{
+            color:gray;
+
+        }
+
+        /*.jltable_header_container tr [data-sort=asc] div
+        {
+            background-image:url('images/jltable/asc.png');
+            background-position:right  5px;
+            background-repeat:no-repeat;
+
+        }
+
+        .jltable_header_container tr [data-sort=desc] div
+        {
+            background-image:url('images/jltable/desc.png');
+            background-position:right 5px;
+            background-repeat:no-repeat;
+        }*/
+
+        .asc 
+        {
+            background-image:url('/images/jltable/asc.png');
+            background-position:right   center;
+            background-repeat:no-repeat;}
+
+        .desc 
+        {background-image:url('/images/jltable/desc.png');
+            background-position:right  center;
+            background-repeat:no-repeat;}
+
+        a.btSearchHeader
+        {
+            border-radius:4px;
+            background-color:#808080;
+            background-image:url('/images/jltable/search.png');
+            background-repeat:no-repeat;
+
+        }
+
+        a.btSearchHeader:hover
+        {
+            border-radius:4px;
+            background-color:#dcdcdc;
+            background-image:url('/images/jltable/search.png');
+            background-repeat:no-repeat;
+
+        }
+       
+        
+
+        /* PULSANTI SENZA COMMAND */
+        .jlgrid_button_lusigrid_nocommand
+        {
+            margin:auto;
+            float:right;
+            font-size:10px;
+            cursor:pointer;
+            min-width:30px;
+            display:block;
+            padding:3px;
+            border-radius:4px;
+            background-color:#99cfe5;
+            color:white;
+        }
+        .jlgrid_button_lusigrid_nocommand:hover
+        {
+            border-radius:4px;
+            background-color:#d6d6d6;
+            color:white;
+        }
+
+        /*UTILIZZARE INVECE QUESTA CLASSE COMUNE PER I PULSANTI*/
+        .jlgrid_buttons_lusigrid
+        {
+            margin:auto;
+            cursor:pointer;
+            min-width:30px;
+            display:block;
+            padding:6px 6px 6px 25px;
+            border-radius:4px;
+            background-color:#eeeeee;
+            color:#808080;
+            text-decoration:none;
+			border:solid 1px #dcdcdc;
+			font-size:8px;
+			font-weight:bold;
+            
+        }
+		       
+
+        .jlgrid_buttons_lusigrid:hover
+        {
+           
+            background-color:#d6d6d6;
+            color:white;
+            text-decoration:none;
+        }
+
+        /* PULSANTE CERCA */
+        .jlgrid_buttoncerca_lusigrid
+        {
+            margin:auto;
+            font-size:10px;
+            cursor:pointer;
+            min-width:30px;
+            display:block;
+            padding:5px;
+            border-radius:4px;
+            background-color:#eeeeee;
+            color:#808080;
+            text-decoration:none;
+            width:60px;
+            text-align:center;
+			border:solid 1px #dcdcdc;
+            
+
+        }
+
+        /* PULSANTE CERCA CLEAR */
+        .jlgrid_buttoncercaclear_lusigrid
+        {
+             margin:auto;
+            font-size:10px;
+            cursor:pointer;
+            min-width:30px;
+            display:block;
+            padding:5px;
+            border-radius:4px;
+            background-color:#eeeeee;
+            color:#808080;
+            text-decoration:none;
+            width:60px;
+            text-align:center;
+            border:solid 1px #dcdcdc;
+
+        }
+
+		/*PULSANTE DOCUMENTI*/
+		.jlgrid_button_lusigrid_documenti
+{
+	background-position: 3px 3px;
+	background-image: url('/images/jltable/icodocumenti.png');
+	background-repeat: no-repeat;
+}
+
+				/*PULSANTE SCHEDA IN PERSONALE*/
+		.jlgrid_button_lusigrid_scheda
+{
+	padding-left: 25px !important;
+	background-position: 3px 3px;
+	background-image: url('/images/jltable/icodocumenti.png');
+	background-repeat: no-repeat;
+}
+
+
+
+				/*PULSANTE nomine*/
+.jlgrid_button_lusigrid_nomine
+{
+	background-position: 3px 3px;
+	background-image: url('/images/jltable/nomine.png');
+	background-repeat: no-repeat;
+}
+				/*PULSANTE personale*/
+.jlgrid_button_lusigrid_personale
+{
+	background-position: 3px 3px;
+	background-image: url('/images/jltable/personale.png');
+	background-repeat: no-repeat;
+}
+
+		.jlgrid_button_lusigrid_modifica
+		{
+			background-position: 3px 3px;
+			padding-left: 25px !important;
+			background-image: url('/images/jltable/icodocumenti.png');
+			background-repeat: no-repeat;
+
+		}
+
+.jlgrid_button_lusigrid_clona {
+    background-position: 3px 3px;
+    padding-left: 25px !important;
+    background-image: url('/images/jltable/icodocumenti.png');
+    background-repeat: no-repeat;
+}
+        .pulsantereport
+		{
+			background-position: 3px 3px;
+			padding-left: 25px !important;
+			background-image: url('/images/jltable/icodocumenti.png');
+			background-repeat: no-repeat;
+
+		}
+
+		.jlgrid_button_lusigrid_gallery
+		{
+			background-position: 3px 3px;
+			padding-left: 25px !important;
+			background-image: url('/images/jltable/icogallery.png');
+			background-repeat: no-repeat;
+
+		}
+
+		.jlgrid_button_lusigrid_elimina
+		{
+			background-position: 3px 3px;
+			padding-left: 25px !important;
+			background-image: url('/images/jltable/icoelimina.png');
+			background-repeat: no-repeat;
+			background-color:#ffefef;
+
+		}
+
+		.jlgrid_toolbarbutton_lusigrid_nuovo
+		 {
+			background-position: 5px 5px;
+			padding-left: 25px !important;
+			background-image: url('/images/jltable/add.png');
+			background-repeat: no-repeat;
+			background-color:white;
+			border:solid 1px #dcdcdc;
+			border-radius:4px;
+			box-shadow:2px 2px 2px #dcdcdc;
+			cursor:pointer;
+		}
+
+		.jlgrid_toolbarbutton_lusigrid_nuovo:hover
+		 {
+			
+			background-color:#dcdcdc;
+			color:white;
+			text-decoration:none;
+		}
+
+        /*  PULSANTE ESPORTA CSV   */
+        .jlgrid_toolbarbutton_lusigrid_csv
+		 {
+			background-position: 5px 5px;
+			padding-left: 25px !important;
+			background-image: url('/images/jltable/csv.png');
+			background-repeat: no-repeat;
+			background-color:white;
+			border:solid 1px #dcdcdc;
+			border-radius:4px;
+			box-shadow:2px 2px 2px #dcdcdc;
+			cursor:pointer;
+		}
+
+		.jlgrid_toolbarbutton_lusigrid_csv:hover
+		 {
+			
+			background-color:#dcdcdc;
+			color:white;
+			
+		}
+
+
+
+        #jlgrid_paginator_lusigrid
+        {
+            padding:10px;
+            border-top:solid 1px #b7b7b7;
+            height:45px;
+			background-color:white;
+        }
+
+        .jlgrid_pagelink_lusigrid
+        {
+            padding:3px;
+            display:block;
+            background-color:#808080;
+            border-radius:3px;
+            color:white;
+            min-width:11px;
+            float:left;
+            margin:2px;
+            text-align:center;
+            cursor:pointer;
+
+        }
+
+        .jlgrid_pagelink_lusigrid:hover
+        {
+           
+            background-color:#d6d6d6;
+            color:white;
+            
+
+        }
+
+        .jlgrid_pagelink_selected_lusigrid
+        {
+            padding:3px;
+            display:block;
+            background-color:#d6d6d6;
+            border-radius:3px;
+            color:white;
+            min-width:11px;
+            float:left;
+            margin:2px;
+            text-align:center;
+            cursor:pointer;
+
+        }
+
+        /*  puntini del paginatore*/
+        .jlgrid_pagenolink_lusigrid
+        {
+            padding:0px;
+            display:block;
+            /*background-color:#d6d6d6;
+            border-radius:3px;*/
+            color:#dcdcdc;
+            min-width:11px;
+            float:left;
+            margin:2px;
+            text-align:center;
+            padding-top:8px;
+
+        }
+
+        #jlpaginator_label_lusigrid
+        {
+
+            line-height:20px;
+            padding-left:10px;
+            float:left;
+        }
+
+        /*TUTTE LE TENDINE POPUP RICERCA*/
+        .jlgrid_searchpops_lusigrid
+        {
+            background-color:white;
+            border-radius:0 0 8px 8px;
+            border-left:solid 1px #dcdcdc;
+            border-right:solid 1px #dcdcdc;
+            border-bottom:solid 1px #dcdcdc;
+        }

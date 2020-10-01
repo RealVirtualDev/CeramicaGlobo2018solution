@@ -1,0 +1,58 @@
+﻿@using WebSite.Models
+@using WebSite.Models.ViewModels
+@using WebSite.Helpers
+@using WebSite.Infrastructure
+@using HtmlHelpers
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section headerMeta{
+    <title></title>
+    <meta name="description" content="" />
+}
+<div class="sitecontent innercontent" style="margin-top:180px;">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "paymentform" }))
+    {
+        @Html.AntiForgeryToken()
+    <div class="paymentform" style="font-size:13px;margin:30px auto;border:solid 1px gray;border-radius:5px;background-color:#f1f1f1;padding:20px;max-width:450px;width:100%;">
+        <b>MODULO DI PAGAMENTO / PAYMENT FORM</b><br /><br />
+        <br />
+        <div class="form-group">
+            <label>Lingua/Language</label>
+            <select class="form-control" id="ddllang">
+                <option value="IT">Italiano</option>
+                <option value="EN">English</option>
+                
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Riferimento (Ordine/Offerta) / Refer Number (Order/Quote)</label>
+            <input data-validation="required" data-validationlangkey="Field -1 is mandatory" data-validationfield="Riferimento (Ordine/Offerta) / Refer Number (Order/Quote)" type="text" id="tbriferimento" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Ragione Sociale / Company Name</label>
+            <input type="text" data-validation="required" data-validationlangkey="Field -1 is mandatory" data-validationfield="Ragione Sociale/Company Name" id="tbragione" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Importo / Amount</label>
+            <input type="text" data-validation="required" data-validationlangkey="Field -1 is mandatory" data-validationfield="Importo/Amount" id="tbimporto" class="form-control" />
+        </div>
+        <div class="text-right margin-top-30">
+            <a style="color:#fff" onclick="ajaxSend()" class="btn btn-info btn-inviapagamento">CONTINUA - CONTINUE</a>
+        </div>
+           
+           
+            <div class="text-center margin-top-30">
+                <img class="img-fluid" src="/images/common/cartecredito.png" />
+            </div>
+        </div> 
+    }
+</div>
+@{Html.RenderPartial("_MessageBox");}
+@section footerScript{
+    <script src="/Content/Scripts/jsvalidator.js"></script>
+    <script src="/Content/Scripts/formPagamento.js"></script>
+}

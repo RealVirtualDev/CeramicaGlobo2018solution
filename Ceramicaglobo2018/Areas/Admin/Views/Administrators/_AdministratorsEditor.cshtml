@@ -1,0 +1,33 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+@model Administrators
+
+
+<div class="validateWrapper">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "signupform" }))
+{
+    <div class="row form-group">
+        <label>Nome</label>
+        <input class="form-control" type="text" id="tbname" value="@(Model.name)" />
+    </div>
+    <div class="row form-group">
+        <label>Email</label>
+        <input data-validation="required,email" data-validationlangkey="" data-validationfield="Email" class="form-control" type="text" id="tbemail" value="@(Model.email)" />
+    </div>
+    <div class="row form-group">
+        <label>Password</label>
+        <input data-validation="required" data-validationlangkey="" data-validationfield="Password" class="form-control" type="text" id="tbpassword" value="@(Model.password)" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a class="btn btn-default btn-annulla">ANNULLA</a>
+            <a class="btn btn-primary btn-salva">SALVA</a>
+        </div>
+    </div>
+
+}
+</div>
+<script src="/Content/Scripts/Admin/administratorsEditor.js?v=1"></script>
+<script>
+    initEditor('@(Html.Raw(Json.Encode(Model)))');
+</script>

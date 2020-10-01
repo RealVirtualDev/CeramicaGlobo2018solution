@@ -1,0 +1,81 @@
+﻿@model WebSite.Models.Administrators
+
+@{
+    ViewBag.Title = "LOGIN";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="loginBox">
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "signupform" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <label>Email</label>
+            @Html.TextBoxFor(m=>m.email,new { @class="form-control"})
+        </div>
+        <div class="col-md-12 form-group">
+            <label>Password</label>
+            @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+        </div>
+        <div class="col-md-12">
+            <a class="">Hai dimenticato la password?</a>
+        </div>
+        <div class="col-md-12 text-right margin-top-10">
+            <a onclick="ajaxLogin()" class="btn btn-default btn-login " data-loading-text="Loading...">LOGIN</a>
+        </div>
+        <div class="bg-forminfo paddingInner error-div col-md-12 margin-top-20 text-center ">
+            
+        </div>
+    </div>
+}
+        
+
+    
+</div>
+@section footerScript{
+
+<script>
+        getToken = function () {
+            return $('input[name=__RequestVerificationToken]').val();
+        }
+        ajaxLogin = function () {
+            $(".btn-login").addClass("btn-loading disabled");
+
+            $.post("/admin/Login", {
+                email: $("#email").val(),
+                password: $("#password").val(),
+                __RequestVerificationToken: getToken() // Token is posted.
+            }, function (data) {
+                //$btn.button('reset')
+                // console.info(data);
+                //console.info(data)
+
+                if (data.Success) {
+                    // console.info(data)
+                    window.location.href = data.RedirectUrl;
+                }
+                else {
+                    // credenziali errate
+                    $(".error-div").html(data.Message).fadeIn();
+                    $(".btn-login").removeClass("btn-loading disabled");
+                }
+            });
+        }
+
+        function keypressHandler(e) {
+
+            if (e.which == 13) {
+
+                e.preventDefault(); //stops default action: submitting form
+                $(this).blur();
+                $('.btn-login').focus().click();//give your submit an ID
+            }
+        }
+
+        $('body').on("keyup", "#signupform", (e) => keypressHandler(e));
+
+</script>
+
+}

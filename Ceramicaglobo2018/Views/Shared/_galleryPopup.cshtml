@@ -1,0 +1,37 @@
+﻿@using WebSite.Models.ViewModels
+@using WebSite.Models
+@model galleryPopup
+
+<div class="galleryPopup">
+    <div class="row">
+        <div class="col-md-12 text-right margin-top-20">
+            <a onclick="galleryPopup.close()" class="btn-close"></a>
+        </div>
+        <div class="col-md-12">
+            <h1>@Model.titolo</h1>
+        </div>
+        <div class="col-md-12 text-center">
+            @if(!string.IsNullOrEmpty(Model.embeddedcontent))
+            {
+                @Html.Raw(Model.embeddedcontent);
+            }
+            else
+            {
+                <div class="imggallerycontent">
+                    <img class="img-fluid" src="@Model.imgmain" />
+                </div>
+                <div class="text-center">
+                    @foreach(ResourceGallery g in Model.gallery)
+                    {
+                    <div id="@("img" + g.itemgroup)" data-imgbig="@(g.folder + "big/" + g.img)" onclick="galleryPopup.changeImage('@g.itemgroup')" class="imggallerybutton"><img src="@(g.folder + "min/" + g.img)" /></div>
+                    }
+                </div>
+               
+            }
+        </div>
+        <div class="col-md-12 description margin-top-10">
+            @Html.Raw( Model.content)
+        </div>
+    </div>
+</div>
+<div class="oscuragallery"></div>

@@ -1,0 +1,18 @@
+﻿@model List<string>
+<section>
+    <div class="homeslider">
+        <div class="homeslider_inner">
+            @{int idx = 0; }
+            @foreach (string s in Model)
+            {
+                <div id="slideritem@(idx+1)" class="homeslideritem" style="background-image:url('@s');@(idx>0 ? "display:none;" : "")">
+
+                </div>
+                idx++;
+            }
+            <div class="startdiv text-center">
+                Inspired by Life
+            </div>
+        </div>
+    </div>
+</section>

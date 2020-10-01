@@ -1,0 +1,93 @@
+﻿@using WebSite.Models;
+@using WebSite.Helpers;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    LanguageSetting.Lang = ViewContext.RouteData.Values["lang"] != null ? ViewContext.RouteData.Values["lang"].ToString() : "it";
+}
+
+@section headerMeta{
+    <title>@(ViewBag.metatitle)</title>
+    <meta name="description" content="@(ViewBag.metadescription)" />
+}
+@{Html.RenderAction("HomeSlider");}
+
+<div class="sitecontent">
+
+    <!-- CERSAIE 2019-->
+    @*<div class="col-12  mt-5">
+            @if (LanguageSetting.Lang == "it")
+            {
+                <a target="_blank" href="https://www.cersaie.it/biglietto/722a8ed2"><img class="img-fluid" src="~/images/home/cersaie_it.png" /></a>
+            }
+            else
+            {
+                <a target="_blank" href="https://www.cersaie.it/ticket/722a8ed2"><img class="img-fluid" src="~/images/home/cersaie_en.png" /></a>
+            }
+        </div>*@
+
+    <div class="blocchihome">
+        @{Html.RenderAction("BlocchiHome");}
+        @*Html.RenderAction("BlogStrip");*@
+    </div>
+</div>
+
+@section footerScript{
+    <script>
+       
+            // SLIDER MANAGER
+            let vh = $(window).height();
+
+            let headerh = $(".header").outerHeight();
+           // console.info(headerh);
+            $(".homeslider").css("height", (vh - headerh) + "px");
+            $(".homeslider_inner").css("height", (vh - headerh) + "px");
+            $(".homeslider_inner img").css("height", (vh - headerh) + "px");
+
+
+            $(".startdiv").on("click", function () {
+                //let scrolltesto = $(".b1").offset().top + $(".homeslider_inner").height() - 950;
+                let scrolltesto = $(".homeslider_inner").height();
+                // console.info(scrolltesto);
+                $('html, body').animate({ scrollTop: scrolltesto + "px" }, 1200, function () { })
+            });
+
+            let numItems = $(".homeslideritem").length;
+            let currentFrame = 1;
+
+           // console.info(numItems);
+            setInterval(function () {
+                moveNextSlide()
+
+            }, 8000);
+
+            var moveNextSlide = function () {
+                let nextFrame = (currentFrame+1)>=numItems ? 1 : (currentFrame+1);
+                let prevFrame = currentFrame;
+               
+               // console.info(nextFrame,prevFrame,currentFrame);
+                currentFrame = nextFrame;
+
+                $("#slideritem" + prevFrame).stop(true, true).fadeOut("slow");
+                $("#slideritem" + nextFrame).stop(true, true).fadeIn("slow");
+
+            }
+
+
+            $(".blogitemdescription").each( function () {
+               // console.info($(this).html());
+                $(this).html(shorten($(this).html(), 250));
+            })
+
+            function shorten(text, maxLength) {
+                var ret = text;
+                if (ret.length > maxLength) {
+                    ret = ret.substr(0, maxLength - 3) +"...";
+                }
+                return ret;
+            }
+
+
+    </script>
+}

@@ -1,0 +1,14 @@
+﻿@using WebSite.Models
+@using WebSite.Infrastructure
+@model List<Cataloghi>
+
+<div class="row margin-top-80">
+    @foreach (Cataloghi c in Model)
+    {
+        <div class="col-md-2 col-6 col-sm-3 item-column">
+            <a class="d-block" href="@c.pdf" target="_blank"><img src="@c.img" alt="" class="img-fluid" /></a>
+            <h2 class="item-titolo">@c.titolo</h2>
+            <div class="item-sottotitolo">@(("down_" + c.tipo.ToLower()).Translate()) </div>
+        </div>
+    }
+</div>

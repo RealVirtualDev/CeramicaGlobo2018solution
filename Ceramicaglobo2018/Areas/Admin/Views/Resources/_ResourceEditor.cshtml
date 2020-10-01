@@ -1,0 +1,44 @@
+﻿@using WebSite.Models
+@using WebSite.Areas.Admin.Models.ViewModels;
+@model AdminCommon
+
+<div class="validateWrapper">
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "signupform" }))
+    {
+        // MODELLO
+
+        <div class="modelview">
+            @{Html.RenderPartial("_ResourceModelControls", Model.Resource);}
+        </div>
+                // GALLERY
+                <div class="galleryview">
+                    @if (Model.Resource.hasgallery)
+                    {
+                        Html.RenderPartial("~/Areas/Admin/views/GalleryManager/_ResourceGallery.cshtml", Model.Resource.Gallery);
+                    }
+                </div>
+                // FILES
+                <div class="filesview">
+                    @if (Model.Resource.hasfiles)
+                    {
+                        Html.RenderPartial("~/Areas/Admin/views/FilesManager/_ResourceFiles.cshtml", Model.Resource.Files);
+                    }
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <a class="btn btn-default btn-annulla">CHIUDI</a>
+                        <a class="btn btn-primary btn-salva">SALVA</a>
+                    </div>
+                </div>
+
+                                }
+</div>
+<script src="/Content/Scripts/Admin/resourceEditor.js?v=@(DateTime.Now.Millisecond)"></script>
+<script>
+    initEditor(JSON.parse('@(Html.Raw(Model.jsonData))'));
+</script>
+

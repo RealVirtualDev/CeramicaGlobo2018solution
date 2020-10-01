@@ -1,0 +1,19 @@
+﻿@using WebSite.Models
+@model List<Designers>
+
+@foreach (Designers d in Model)
+{
+    <article>
+        <div class="row margin-top-40  item-designers">
+            <div class="col-md-12">
+                <h1>@d.titolo</h1>
+            </div>
+            <div class="col-md-12 sectiontext text-justify">
+                <img src="@d.img" alt="@d.titolo" />
+                @Html.Raw(d.content)
+            </div>
+        </div>
+    </article>
+
+}
+

@@ -1,0 +1,191 @@
+﻿@using WebSite.Infrastructure;
+@using WebSite.Helpers;
+
+<footer>
+    <div class="footer">
+        <div class="sitecontent">
+            @*RIGA 1*@
+            <div class="row footer_line_1">
+                <div class="col-md footer_item_line1 text-center">
+                    <a href="@(LanguageSetting.GetLangNavigation())/save-water">
+                        <img class="img-fluid" alt="Ceramica Globo Save Water" src="~/images/common/btsavewater.png" />
+                    </a>
+                </div>
+                <div class="col-md footer_item_line1 text-center">
+                    <div class="">
+                        <div class="btsocial">
+                            <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <a target="_blank" href="https://www.facebook.com/GloboCeramica">
+                                    <rect class="socialbtbox" x="0" y="0" rx="3" ry="3" width="50" height="50"></rect>
+                                    <image width="30" height="30" x="10" y="10" xlink:href="/images/common/btfacebook.png" />
+                                </a>
+                            </svg>
+                        </div>
+
+                        <div class="btsocial">
+                            <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <a target="_blank" href="https://www.youtube.com/user/ceramicaglobo">
+                                    <rect class="socialbtbox" x="0" y="0" rx="3" ry="3" width="50" height="50"></rect>
+                                    <image width="30" height="30" x="10" y="10" xlink:href="/images/common/btyoutube.png" />
+                                </a>
+                            </svg>
+                        </div>
+
+                        <div class="btsocial">
+                            <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <a target="_blank" href="https://instagram.com/ceramicaglobo/">
+                                    <rect class="socialbtbox" x="0" y="0" rx="3" ry="3" width="50" height="50"></rect>
+                                    <image width="30" height="30" x="10" y="10" xlink:href="/images/common/btpinterest.png" />
+                                </a>
+                            </svg>
+                        </div>
+                    </div>
+                
+
+                </div>
+                <div class="col-md footer_item_line1 text-center">
+                    <img alt="ADI Member" class="img-fluid" src="~/images/common/adimember.png" />
+                </div>
+                <div class="col-md footer_item_line1 text-center">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <a href="https://itunes.apple.com/us/app/ceramica-globo/id900031851?l=it&ls=1&mt=8"><img class="img-fluid" alt="Ceramica Globo App on Apple App Store" src="~/images/common/iosappstore.png" /></a>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <a href="https://play.google.com/store/apps/details?id=net.idrolab.CeramicaGloboxxxxxxxx"><img class="img-fluid" alt="Ceramica Globo App on Android App Store" src="~/images/common/googleappstore.png" /></a>
+                        </div>
+                        <div class="col-md-12 text-center margin-top-10">
+                            @("footer_app_text".Translate())
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*RIGA 2*@
+            <div class="row footer_line_2">
+               
+                    <div class="col-md-10 col-sm-12 margin-bottom-20 text-center text-md-left footermenuwrapper">
+                        @*<a href="/">@("lbl_areaclientifooter".Translate())</a> | <a href="/">@("lbl_areaagenti".Translate())</a> |*@ 
+                        <a href="@(LanguageSetting.GetLangNavigation() + "/" + (LanguageSetting.Lang=="it" ? "condizioni" : "conditions") )">@("lbl_condizioniuso".Translate())</a> | <a href="@(LanguageSetting.GetLangNavigation())/privacypolicy">Privacy Policy</a> | <a href="@(LanguageSetting.GetLangNavigation())/cookiespolicy">Cookies Policy</a>
+                    </div>
+                    <div class="col-md-2 col-sm-12 text-center text-md-right">
+                        <a onclick="changelanguage()" class="btn-lang btn-lang-@(LanguageSetting.Lang)">@(("lang-"+ LanguageSetting.Lang).Translate())</a>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-md-7 col-sm-12 col-12 margin-bottom-20">
+                        <div class="input-group margin-top-20 d-none d-sm-flex">
+                            <input id="tbnewsletterfooter" type="text" class="form-control" placeholder="@("newsletter_inseriscimail".Translate())" aria-label="Newsletter Join">
+                            <div class="input-group-append">
+                                <button onclick="joinnewsletter('@(LanguageSetting.Lang)')" class="btn btn-footerdark text-uppercase" type="button">@("bt_iscriviti".Translate().ToUpper())</button>
+                                <button onclick="readnewsletter('@(LanguageSetting.Lang)')" class="btn btn-footerdark text-uppercase" type="button" style="border-left-color:white;">@("newsletter_legginewsletter".Translate().ToUpper())</button>
+                            </div>
+                        </div>
+                        @*MOBILE*@
+                        <div class="col-12 d-sm-none margin-top-20">
+                            <input id="tbnewsletterfootermobile" type="text" class="form-control" placeholder="@("newsletter_inseriscimail".Translate())" aria-label="Newsletter Join">
+                            <div class="text-center">
+                            <button onclick="joinnewslettermobile('@(LanguageSetting.Lang)')" class="btn btn-footerdark btn-sm text-uppercase margin-top-20" type="button">@("bt_iscriviti".Translate().ToUpper())</button>
+                            <button onclick="readnewsletter('@(LanguageSetting.Lang)')" class="btn btn-footerdark btn-sm  text-uppercase margin-top-20" type="button" style="border-left-color:white;">@("newsletter_legginewsletter".Translate().ToUpper())</button>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-5 col-sm-12 col-12 text-center text-md-right">
+                    <script>
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+
+                    <div id="fb-root"></div>
+                    <div class="fb-like margin-top-30" data-href="http://www.facebook.com/pages/Ceramica-Globo/264875180279679?fref=ts" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="arial"></div>
+                </div>
+                    </div>
+            @*RIGA 3*@
+            <div class="row footer_line_3 row">
+                <div class="col-md-6">
+                    Copyright Ceramica Globo S.p.a. @(DateTime.Now.Year)
+                </div>
+                <div class="col-md-6 text-right">
+                    <a class="footercredit" target="_blank" href="https://www.realvirtual.it">
+                        <img src="~/images/common/website-realvirtual.png" />
+                    </a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+</footer>
+<div class="comparewrapper">
+    <div class="compareicon"></div>
+    <div class="comparebuttons"><a  onclick="Compare('@(LanguageSetting.Lang)')" class="">@("lbl_confronta".Translate())</a><a class="cancella" onclick="emptyCompare()">@("prodcancella".Translate())</a></div>
+</div>
+
+<script src="~/Content/Scripts/loginPopup.js"></script>
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31012280-1']);
+    _gaq.push(['_gat._anonymizeIp']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+    @if (!(Request.RawUrl.Contains("paynow") || Request.RawUrl.Contains("paymentdone") || Request.RawUrl.Contains("paymentfail")))
+    {
+        //Html.RenderAction("LoginPopup", "Popup");
+
+        string languser = "it";
+        try
+        {
+            languser = Request.UserLanguages[0].Split('-')[0];
+        }
+        catch
+        {
+            // Probabilmente uno spider o uno sharer
+        }
+
+
+
+        if (Request.Cookies["languser"] != null && !string.IsNullOrEmpty(Request.Cookies["languser"].Value))
+        {
+            // preferenza già scelta
+            if (LanguageSetting.Lang != Request.Cookies["languser"].Value)
+            {
+                Response.Redirect(Request.Cookies["languser"].Value == "it" ? "/" : "/" + Request.Cookies["languser"].Value + "/");
+            }
+            else
+            {
+                // mostro popup cookies
+                if (Request.Cookies["acceptcookies"] == null || string.IsNullOrEmpty(Request.Cookies["acceptcookies"].Value) || Request.Cookies["acceptcookies"].Value != "true")
+                {
+                    Html.RenderAction("CookiesInfo", "Popup");
+                }
+
+            }
+        }
+        else
+        {
+            if (languser != LanguageSetting.Lang)
+            {
+                Html.RenderAction("LanguageSelector", "Popup");
+            }
+            else
+            {
+                // mostro popup cookies
+                if (Request.Cookies["acceptcookies"] == null || string.IsNullOrEmpty(Request.Cookies["acceptcookies"].Value) || Request.Cookies["acceptcookies"].Value != "true")
+                {
+                    Html.RenderAction("CookiesInfo", "Popup");
+                }
+            }
+        }
+    }
+
+   
+
+

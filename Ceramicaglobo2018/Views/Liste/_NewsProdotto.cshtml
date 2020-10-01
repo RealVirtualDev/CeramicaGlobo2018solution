@@ -1,0 +1,13 @@
+﻿@using WebSite.Models
+@model List<NewsProdotto>
+
+<div class="row margin-top-80">
+    @foreach (NewsProdotto r in Model)
+    {
+        <div class="col-md-3 col-12 item-column">
+            <a class="d-block pointer" onclick="galleryPopup.show('prodotto','@r.itemgroup')" ><img src="@r.img" alt="" class="img-fluid" /></a>
+            <h2 class="item-titolo">@r.titolo</h2>
+            <div class="item-sottotitolo">@r.descrizione</div>
+        </div>
+    }
+</div>

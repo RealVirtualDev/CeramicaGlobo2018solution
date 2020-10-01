@@ -1,0 +1,32 @@
+﻿@using WebSite.Models
+@using WebSite.Infrastructure
+@using WebSite.Helpers
+
+@model List<BlogPost>
+
+     <div class="bloccoblog ">
+            <h1>@("home_title_dablog".Translate())</h1>
+            <div class="row">
+                @foreach (BlogPost post in Model)
+                {
+                    string link = string.Format("http://blog.ceramicaglobo.com/{0}/{1}", (LanguageSetting.Lang != "it" ? "en/" :"") + post.categoria, post.urlname);
+
+                        <div style="min-height:350px;" class="col-md-4 col-sm-6 col-12 postitem margin-bottom-30">
+                            <article>
+                                <a target="_blank" href="@(link)" style="background-image:url('http://blog.ceramicaglobo.com/@(post.imgmin)');" class="blogitemImage">
+
+                                </a>
+                                <h1><a href="@(link)">@post.titolo</a></h1>
+                                <div class="blogitemdata">@post.data.ToString("D")</div>
+                                <div class="blogitemdescription">
+                                    @Html.Raw(post.descrizione)
+                                </div>
+                                <div class="text-right">
+                                    <a class="btn btn-more" href="@(link)">@("btleggi".Translate())</a>
+                                </div>
+                            </article>
+                        </div>
+                    }
+            </div>
+        </div>
+
