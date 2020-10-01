@@ -1,11 +1,23 @@
 ﻿@using WebSite.Models
+@using CeramicaGlobo2018.Helpers
 @model  BlocchiHome
 @*TEMPLATE 2 COLONNE PER IMMAGINE E 1 COL PER IL TESTO*@
 @*<article>*@
     <div style="width:100%;" class="row blocco_img2txt1 margin-bottom-20">
         <div class="col-md-12"><h1>@Model.titolo</h1></div>
         <div class="col-md-8 col-sm-12 col-12">
-            <img class="img-fluid margin-bottom-60" src="@Model.img" />
+            @if (!string.IsNullOrEmpty(Model.urlvideo))
+            {
+                // VIDEO YOUTUBE
+                <div class="embed-responsive embed-responsive-16by9 mb-3">
+                    <iframe class="embed-responsive-item" src="@(OEmbed.GetYoutubeResult(Model.urlvideo).src)" allowfullscreen></iframe>
+                </div>
+            }
+            else
+            {
+                <img class="img-fluid margin-bottom-60" src="@Model.img" />
+            }
+
         </div>
         <div class="col-md-4 col-sm-12 col-12" >
             @Html.Raw(Model.descrizione)

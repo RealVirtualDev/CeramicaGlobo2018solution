@@ -20,6 +20,7 @@ namespace WebSite.Models
         public bool usaimmagineinterna { get; set; }
 
         public string link { get; set; }
+        public string urlvideo { get; set; }
         public string metatitle { get; set; }
         public string metadescription { get; set; }
         public string urlname { get; set; }
